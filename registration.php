@@ -90,40 +90,40 @@
 			<div class="wow fadeInUp col-md-5 col-sm-5" style="background-color: white;border-radius: 10px;" data-wow-delay="1s">
 				<form action="#" method="post">
 					<h4>Name *</h4>
-					<input name="name" required type="text" class="form-control" id="name" placeholder="Name">
+					<input name="name" required type="text" class="form-control" id="name" placeholder="Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" >
 					<h4>Email *</h4>
 					<input name="email" required type="email" class="form-control" id="email" placeholder="Email Address">
 					<h4>Gender</h4>
-					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 10px;">
-					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 20px;">
+					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 10px;" required>
+					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 20px;" required>
 					<h4>Address</h4>
-					<textarea name="intque" type="text" class="form-control" id="firstname" placeholder="Full Address"></textarea>
+					<textarea name="intque" type="text" class="form-control" id="firstname" placeholder="Full Address" pattern="[A-Za-z ]+" maxlength="255"></textarea>
 					<h4>City *</h4>
 					<input name="city" required type="text" class="form-control" id="city" placeholder="Kolkata, Bangalore, Delhi etc...">
 					<h4>State *</h4>
-						<input name="state" required type="text" class="form-control" id="state" placeholder="State">					
+						<input name="state" required type="text" class="form-control" id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65">					
 					<h4>Password *</h4>
 					<input name="password" required type="password" class="form-control" id="password" placeholder="Password">
 					<h4>Confirm Password *</h4>
 					<input name="con_password" required type="password" class="form-control" id="con_password" placeholder="Confirm Password">
 					<h4>Type of User</h4>
-					<select name="user_type" class="form-control" id="user_type">
-						<option>Choose</option>
+					<select name="user_type" class="form-control" id="user_type" required>
+						<option required>Choose</option>
 						<option>Normal</option>
 						<option>Abmassador</option>
 						<option>Donor</option>
 						<option>Influencer</option>
 					</select>
-					<h4>Domain (For Influencer Only)*</h4>
+					<h4>Domain (For Influencer Only) 	</h4>
 					<input name="domain" type="text" class="form-control" id="domain" placeholder="Domain (For Influencer Only)">
 					<h4>Mobile No. *</h4>
-					<input name="mob_no" required type="text" class="form-control" id="mob_no" placeholder="Mobile Number">
+					<input name="mob_no" required type="text" class="form-control" id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
+				maxlength="10">
 					<h4>Occupation *</h4>
-					<input name="occupation" required type="text" class="form-control" id="occupation" placeholder="occupation">
+					<input name="occupation" required type="text" class="form-control" id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65">
 					<input name="confirm" type="radio"><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
 					
-					<div class="col-md-offset-6 col-md-6 col-sm-offset-1 col-sm-10">
-						<a href="login.html" class="btn btn-info">Login</a>
+
 						<input name="submit" type="submit" class="form-control" onclick="return check()" id="submit" value="REGISTER">
 					</div>
 
