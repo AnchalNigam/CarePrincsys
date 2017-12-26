@@ -427,6 +427,13 @@ footer {
     color: #ffffff;
 }
 
+#register .mycls ,select{
+   border: 2px solid #ffffff;
+   border-radius: 0px;
+   color: green;
+   margin-bottom: 16px;
+}
+
 #register .form-control ,select{
   background: transparent;
   border: 2px solid #ffffff;

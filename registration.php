@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/owl.theme.css">
 <link rel="stylesheet" href="css/owl.carousel.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
 <!-- Main css -->
 <link rel="stylesheet" href="css/style.css">
@@ -87,25 +89,24 @@
 				<p>Our Fellows Program is a one-year leadership development program designed to connect and cultivate a pipeline of social changemakers who are committed to tackling poverty and injustice.</p>
 			</div>
 
-			<div class="wow fadeInUp col-md-5 col-sm-5" style="background-color: white;border-radius: 10px;" data-wow-delay="1s">
-				<form action="#" method="post">
+			<div class="wow fadeInUp col-md-5 col-sm-12" style="background-color: white;border-radius: 10px;" data-wow-delay="1s">
+				<form action="#" method="post" onsubmit="pass(); return false;" name="myForm">
 					<h4>Name *</h4>
-					<input name="name" required type="text" class="form-control" id="name" placeholder="Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" >
+					<input name="name" required type="text"  id="name" placeholder="Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" class="mycls" >
 					<h4>Email *</h4>
-					<input name="email" required type="email" class="form-control" id="email" placeholder="Email Address">
+					<input name="email" required type="email"  id="email" placeholder="Email Address" class="mycls">
 					<h4>Gender</h4>
-					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 10px;" required>
-					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 20px;" required>
-					<h4>Address</h4>
-					<textarea name="intque" type="text" class="form-control" id="firstname" placeholder="Full Address" pattern="[A-Za-z ]+" maxlength="255"></textarea>
+					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 10px;" required class="mycls">
+					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 20px;" required class="mycls">
 					<h4>City *</h4>
-					<input name="city" required type="text" class="form-control" id="city" placeholder="Kolkata, Bangalore, Delhi etc...">
+					<input name="city" required type="text" id="city" placeholder="Kolkata, Bangalore, Delhi etc..." class="mycls">
 					<h4>State *</h4>
-						<input name="state" required type="text" class="form-control" id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65">					
+						<input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">					
 					<h4>Password *</h4>
-					<input name="password" required type="password" class="form-control" id="password" placeholder="Password">
+					<input name="password" required type="password"  id="password" placeholder="Password" class="mycls" minlength="8" maxlength="25"
+					title="Password should be between 8 - 25 letters" >
 					<h4>Confirm Password *</h4>
-					<input name="con_password" required type="password" class="form-control" id="con_password" placeholder="Confirm Password">
+					<input name="con_password" required type="password"  id="con_password" placeholder="Confirm Password" class="mycls" minlength="8" maxlength="25">
 					<h4>Type of User</h4>
 					<select name="user_type" class="form-control" id="user_type" required>
 						<option required>Choose</option>
@@ -115,12 +116,13 @@
 						<option>Influencer</option>
 					</select>
 					<h4>Domain (For Influencer Only) 	</h4>
-					<input name="domain" type="text" class="form-control" id="domain" placeholder="Domain (For Influencer Only)">
+					<input name="domain" type="text"  id="domain" placeholder="Domain (For Influencer Only)" class="mycls">
 					<h4>Mobile No. *</h4>
-					<input name="mob_no" required type="text" class="form-control" id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
-				maxlength="10">
+					<input name="mob_no" required type="text"  id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
+				maxlength="10" class="mycls" title="Please only enter digits">
 					<h4>Occupation *</h4>
-					<input name="occupation" required type="text" class="form-control" id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65">
+					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65" class="mycls">
+					<br>
 					<input name="confirm" type="radio"><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
 					
 
@@ -171,6 +173,17 @@
 <!-- =========================
      SCRIPTS   
 ============================== -->
+<script>
+function pass() {
+    var password= document.forms["myForm"].password.value.length;
+    var con_password = document.forms["myForm"].con_password.value.length;
+    if (password != con_password) {
+        alert("Password and Confirm Password don't match");
+        return false;
+    }
+    return true;
+}
+</script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.parallax.js"></script>
