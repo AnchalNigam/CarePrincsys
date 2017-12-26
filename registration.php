@@ -1,3 +1,56 @@
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+include('config.php');
+$error="";
+$success="";
+if(isset($_POST['submit']))
+{
+	$Name=$_POST['name'];
+	$email=$_POST['email'];
+	$gender=$_POST['Gender'];
+	$address=$_POST['address'];
+	
+	$city=$_POST['city'];
+	$state=$_POST['state'];
+	$password=$_POST['password'];
+	$user=$_POST['usertype'];
+	if(isset($_POST['domain'])){
+		$domain=$_POST['domain'];
+	}
+
+	$contact=$_POST['mob_no'];
+	
+	$occupation=$_POST['occupation'];
+	 $query1=mysqli_query($bd,"select email from user where email='$email'");
+	 
+     if(mysqli_num_rows($query1)>0){
+        $error="Email is already Registered";
+    }
+	else{
+		$password=md5($_POST['password']);
+		$query=mysqli_query($bd,"insert into user(fullname,email,password,gender,state,city,contact,occupation,type,domain,address) values('$Name','$email','$password','$gender','$state','$city','$contact','$occupation','$user','$domain','$address')");
+		if($query)
+{
+   
+	$success="You are successfully Become a part of Care Princsys";
+
+
+}
+else{
+    $success="Not registered,something went worng";
+
+}
+		
+	}
+	
+	
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +67,13 @@
 <link rel="stylesheet" href="css/owl.theme.css">
 <link rel="stylesheet" href="css/owl.carousel.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="myfunction.js" type="text/javascript">
 
-
+</script>
 <!-- Main css -->
 <link rel="stylesheet" href="css/style.css">
 
@@ -25,6 +83,13 @@
 	h4,span{
 		color:black;
 	}
+	
+
+.hidden{
+	display:none;
+	
+}
+
 </style>
 </head>
 <body data-spy="scroll" data-offset="50" data-target=".navbar-collapse">
@@ -90,16 +155,28 @@
 			</div>
 
 			<div class="wow fadeInUp col-md-5 col-sm-12" style="background-color: white;border-radius: 10px;" data-wow-delay="1s">
-				<form action="#" method="post" onsubmit="pass(); return false;" name="myForm">
+				<?php if(!empty($error)){
+				echo "<div class='alert alert-danger fade in'>
+				<a href='#' class='close' data-dismiss='alert'>&times;</a>
+				<strong>$error</strong> </div>"; 
+				} ?>
+					<?php if(!empty($success)){
+				echo "<div class='alert alert-success fade in'>
+				<a href='#' class='close' data-dismiss='alert'>&times;</a>
+				<strong>$success</strong> </div>"; 
+				} ?>
+				<form action="registration.php" method="post" onsubmit="pass();">
 					<h4>Name *</h4>
 					<input name="name" required type="text"  id="name" placeholder="Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" class="mycls" >
 					<h4>Email *</h4>
 					<input name="email" required type="email"  id="email" placeholder="Email Address" class="mycls">
 					<h4>Gender</h4>
-					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 10px;" required class="mycls">
-					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio" id="email" placeholder="gender" style="position: relative;left: 20px;" required class="mycls">
+					<span style="position: relative;bottom: 20px;">Male</span><input name="Gender" required type="radio" value="M" id="email" placeholder="gender" style="position: relative;left: 10px;" required class="mycls">
+					<span style="position: relative;bottom: 20px;left:10px">Female</span><input name="Gender" required type="radio"  value="F" id="email" placeholder="gender" style="position: relative;left: 20px;" required class="mycls">
+					<h4>Address *</h4>
+					<input name="address" required type="text" id="address" placeholder="Your address..." class="mycls">
 					<h4>City *</h4>
-					<input name="city" required type="text" id="city" placeholder="Kolkata, Bangalore, Delhi etc..." class="mycls">
+					<input name="city" required type="text" id="city" placeholder="Kolkata,Bangalore.." class="mycls">
 					<h4>State *</h4>
 						<input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">					
 					<h4>Password *</h4>
@@ -108,22 +185,24 @@
 					<h4>Confirm Password *</h4>
 					<input name="con_password" required type="password"  id="con_password" placeholder="Confirm Password" class="mycls" minlength="8" maxlength="25">
 					<h4>Type of User</h4>
-					<select name="user_type" class="form-control" id="user_type" required>
-						<option required>Choose</option>
-						<option>Normal</option>
-						<option>Abmassador</option>
-						<option>Donor</option>
-						<option>Influencer</option>
+					<select name="usertype" class="form-control" id="user_type" onChange="selecttype(this.value);" required>
+						<option value="">Choose</option>
+						<option value="1">Normal</option>
+						<option value="2">Abmassador</option>
+						<option value="3">Donor</option>
+						<option value="4">Influencer</option>
 					</select>
-					<h4>Domain (For Influencer Only) 	</h4>
-					<input name="domain" type="text"  id="domain" placeholder="Domain (For Influencer Only)" class="mycls">
+					<div class="influencer hidden">
+					<h4>Domain</h4>
+					<input name="domain" type="text"  id="domain" placeholder="Domain" class="mycls">
+					</div>
 					<h4>Mobile No. *</h4>
 					<input name="mob_no" required type="text"  id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
 				maxlength="10" class="mycls" title="Please only enter digits">
 					<h4>Occupation *</h4>
 					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65" class="mycls">
 					<br>
-					<input name="confirm" type="radio"><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
+					<input type="checkbox" name="checkbox" required>required><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
 					
 
 						<input name="submit" type="submit" class="form-control" onclick="return check()" id="submit" value="REGISTER">
