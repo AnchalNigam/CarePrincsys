@@ -1,3 +1,53 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+include('config.php');
+$error="";
+$success="";
+if(isset($_POST['submit']))
+{
+   $email=$_POST['email'];
+   $password=md5($_POST['password']);
+$query=mysqli_query($bd, "SELECT * FROM user WHERE email='$email' and password='$password'");
+$num=mysqli_fetch_array($query);
+if($num>0)
+{
+$extra="index.php";
+$_SESSION['login']=$_POST['email'];
+$_SESSION['id']=$num['id'];
+$_SESSION['username']=$num['fullname'];
+$uip=$_SERVER['REMOTE_ADDR'];
+$status=1;
+$log=mysqli_query($bd, "insert into userlog(useremail,userip,status) values('".$_SESSION['login']."','$uip','$status')");
+$host=$_SERVER['HTTP_HOST'];
+$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+header("location:http://$host$uri/$extra");
+exit();
+}
+else{
+$extra="login.php";
+$email=$_POST['email'];
+$uip=$_SERVER['REMOTE_ADDR'];
+$status=0;
+$log=mysqli_query($bd, "insert into userlog(useremail,userip,status) values('$email','$uip','$status')");
+$host  = $_SERVER['HTTP_HOST'];
+$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+header("location:http://$host$uri/$extra");
+$_SESSION['errmsg']="Invalid email id or Password";
+exit();
+}	
+	
+	
+	
+}
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +100,7 @@
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-			<a href="#" class="navbar-brand">Care Princsys</a>
+			<a href="index.php" class="navbar-brand">Care Princsys</a>
 		</div>
 
 		<div class="collapse navbar-collapse">
@@ -59,10 +109,10 @@
 				<li><a href="#intro" class="smoothScroll">News Feed</a></li>
 				<li><a href="#overview" class="smoothScroll">Overview</a></li>
 				<li><a href="#program" class="smoothScroll">Programs</a></li>
-				<li><a href="registration.html" class="smoothScroll">Register</a></li>
+				<li><a href="registration.php" class="smoothScroll">Register</a></li>
 				<li><a href="#venue" class="smoothScroll">Venue</a></li>
 				<li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-				<li><a href="login.html" class="smoothScroll">Login</a></li>
+				<li><a href="login.php" class="smoothScroll">Login</a></li>
 				<li><a href="#contact" class="smoothScroll">Contact</a></li>
 			</ul>
 
@@ -88,7 +138,19 @@
 			</div>
 
 			<div class="wow fadeInUp col-md-5 col-sm-5" style="background-color: white;border-radius: 10px;" data-wow-delay="1s">
-				<form action="#" method="post">
+			<?php
+				if(!empty($_SESSION['errmsg'])){
+					$a=htmlentities($_SESSION['errmsg']);
+					echo "<div class='alert alert-success fade in'>
+					<a href='#' class='close' data-dismiss='alert'>&times;</a>
+					<strong>$a</strong> </div>";
+				//echo htmlentities($_SESSION['errmsg']);
+				}
+				?>
+				<?php
+				echo htmlentities($_SESSION['errmsg']="");
+				?>
+				<form action="login.php" method="post">
 					<h4>Email *</h4>
 					<input name="email" required type="email" class="form-control" id="email" placeholder="Email Address">
 					<h4>Password *</h4>

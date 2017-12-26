@@ -117,7 +117,7 @@ else{
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-			<a href="#" class="navbar-brand">Care Princsys</a>
+			<a href="index.php" class="navbar-brand">Care Princsys</a>
 		</div>
 
 		<div class="collapse navbar-collapse">
@@ -126,11 +126,12 @@ else{
 				<li><a href="#intro" class="smoothScroll">News Feed</a></li>
 				<li><a href="#overview" class="smoothScroll">Overview</a></li>
 				<li><a href="#program" class="smoothScroll">Programs</a></li>
-				<li><a href="registration.html" class="smoothScroll">Register</a></li>
+				<li><a href="registration.php" class="smoothScroll">Register</a></li>
 				<li><a href="#venue" class="smoothScroll">Venue</a></li>
 				<li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-				<li><a href="login.html" class="smoothScroll">Login</a></li>
 				<li><a href="#contact" class="smoothScroll">Contact</a></li>
+				<li><a href="login.php" class="smoothScroll">Login</a></li>
+				
 			</ul>
 
 		</div>

@@ -1,3 +1,14 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+include('config.php');
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +57,7 @@
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-			<a href="#" class="navbar-brand">Care Princsys</a>
+			<a href="index.php" class="navbar-brand">Care Princsys</a>
 		</div>
 
 		<div class="collapse navbar-collapse">
@@ -58,8 +69,16 @@
 				<li><a href="registration.php" class="smoothScroll">Register</a></li>
 				<li><a href="#venue" class="smoothScroll">Venue</a></li>
 				<li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-				<li><a href="login.html" class="smoothScroll">Login</a></li>
+				
 				<li><a href="#contact" class="smoothScroll">Contact</a></li>
+				<?php if(isset($_SESSION['login'])!=0) {  ?>
+				<li><a href="login.php" class="smoothScroll">Hi! <?php echo $_SESSION['username']; ?></a></li>
+				<li><a href="logout.php" class="smoothScroll">Logout</a></li>
+				
+				<?php }
+				else{ ?>
+					<li><a href="login.php" class="smoothScroll">Login</a></li>	
+					<?php }	?>
 			</ul>
 
 		</div>
@@ -78,8 +97,10 @@
 			<div class="col-md-12 col-sm-12">
 				<h3 class="wow bounceIn" data-wow-delay="0.9s">July 22 - 26 in San Francisco, CA</h3>
 				<h1 class="wow fadeInUp" data-wow-delay="1.6s">Web Design Conference</h1>
-				<a href="login.html" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Login</a>
+				<?php if(isset($_SESSION['login'])==0) {  ?>
+				<a href="login.php" class="btn btn-lg btn-default smoothScroll wow fadeInUp hidden-xs" data-wow-delay="2.3s">Login</a>
 				<a href="registration.php" class="btn btn-lg btn-danger smoothScroll wow fadeInUp" data-wow-delay="2.3s">REGISTER NOW</a>
+				<?php } ?>
 			</div>
 
 
