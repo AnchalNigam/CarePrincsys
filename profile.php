@@ -1,5 +1,15 @@
 <?php
+session_start();
 	include_once('header.php');
+	include('config.php');
+	if(isset($_POST['upload'])){
+	$profile_image=$_FILES['pic']['name'];
+	$profile_image_tmp=$_FILES['pic']['tmp_name'];
+    move_uploaded_file($profile_image_tmp,"admin/userprofile_images/$profile_image");
+	$sql=mysqli_query($bd, "update user set proimage='$profile_image' where id='".$_SESSION['id']."'");
+		
+	}
+	
 ?>
 
 <!-- =========================
@@ -13,22 +23,31 @@
 				<div class="image">
 				<!--Show Image Here-->
 				<br>
-				<img class="thumbnail" src="images/program-img2.jpg">
-				<form action="#" method="post">
+				<?php $query=mysqli_query($bd,"select proimage from user where id='".$_SESSION['id']."'"); 
+				$row=mysqli_fetch_array($query);
+				 if(empty($row['proimage'])) { ?>
+				<img class="thumbnail" src="images/noimage.png">
+				 <?php }
+                  else{				 ?>
+				  <img class="thumbnail" src="admin/userprofile_images/<?php echo $row['proimage']; ?>">
+				  <?php } ?>
+				<form action="profile.php" method="post" enctype="multipart/form-data">
 					<div class="col-lg-6">
-						<input type="file" required name="pic" id="aa">	
+						<input type="file" name="pic" id="aa" required>	
 					</div>
 					<div class="col-lg-6">
-						<input type="submit" style="position: relative;right: 5px;" class="btn btn-xs btn-info" name="upload" value="Change Profile">		
+						<input type="submit" style="position: relative;right: 5px;" class="btn btn-xs btn-info" name="upload" value="Change Profile" >		
 					</div>
 				</form>	
 				</div>				
 			</div>
+			<?php $query=mysqli_query($bd,"select * from user where id='".$_SESSION['id']."'");
+			      $row=mysqli_fetch_array($query);?>
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
 				<br>
-				<h3><label>Name of User</label></h3>
-				<label>Occupation : </label>
-				<h4>Email :</h4><p>mohdafzal330@gmail.com</p>
+				<h3><label><?php echo $row['fullname']; ?></label></h3>
+				<label>Occupation : <?php echo $row['occupation']; ?></label>
+				<h4>Email :</h4><p><?php echo $row['email']; ?></p>
 				
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -50,13 +69,27 @@
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 thumbnail" style="background-color: white;">
 				<br>
 
-				<label>Email :<p id="email">mohafzal330@gmail.com</p></label><br>
-				<label>Type of user :<p id="type">Influencer</p></label><br>
-				<label>Mobile Number :<p id="mob">9012114316</p></label><br>
+				<label>Email :<p id="email"><?php echo $row['email']; ?></p></label><br>
+				<label>Type of user :<p id="type">
+				<?php $val=$row['type']; 
+				   if($val==1){
+					  echo "Normal"; 
+				   }
+				   else if($val==2) {
+					  echo "Ambassador"; 
+				   }elseif($val==3) {
+					   echo "Donor";
+				   }
+				   else{
+					   echo "Influencer";
+				   }
+				
+				?></p></label><br>
+				<label>Mobile Number :<p id="mob"><?php echo $row['contact']; ?></p></label><br>
 				<form action="#" method="post">
 					<input style="display: none;border-radius: 2px;" placeholder="Mobile Number" type="text" name="inp_mob" id="inp_mob">
 				
-				<label style="color: green;">Address :<p id="addr">Department ofComputer Science , MJP Rohilkhand Universty Bareilly</p></label><br>
+				<label style="color: green;">Address :<p id="addr"><?php echo $row['address'].",".$row['city'].",".$row['state']; ?></p></label><br>
 					<textarea style="display: none;border-radius: 2px;" cols="30" rows="3" placeholder="Address" type="text" name="inp_addr" id="inp_addr"></textarea><br>
 					<input type="submit" name="submit" id="submit" value="Update" class="btn btn-sm btn-default"  style="display: none;">
 				</form>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include('config.php');
@@ -103,42 +104,10 @@ else{
 
 </div>
 
-
+<?php include('includes/main-header.php'); ?>
 <!-- =========================
      NAVIGATION LINKS     
 ============================== -->
-<div class="navbar navbar-fixed-top custom-navbar" role="navigation">
-	<div class="container">
-
-		<!-- navbar header -->
-		<div class="navbar-header">
-			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-			</button>
-			<a href="index.php" class="navbar-brand">Care Princsys</a>
-		</div>
-
-		<div class="collapse navbar-collapse">
-
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#intro" class="smoothScroll">News Feed</a></li>
-				<li><a href="#overview" class="smoothScroll">Overview</a></li>
-				<li><a href="#program" class="smoothScroll">Programs</a></li>
-				<li><a href="registration.php" class="smoothScroll">Register</a></li>
-				<li><a href="#venue" class="smoothScroll">Venue</a></li>
-				<li><a href="#sponsors" class="smoothScroll">Sponsors</a></li>
-				<li><a href="#contact" class="smoothScroll">Contact</a></li>
-				<li><a href="login.php" class="smoothScroll">Login</a></li>
-				
-			</ul>
-
-		</div>
-
-	</div>
-</div>
-
 
 
 
@@ -189,7 +158,7 @@ else{
 					<select name="usertype" class="form-control" id="user_type" onChange="selecttype(this.value);" required>
 						<option value="">Choose</option>
 						<option value="1">Normal</option>
-						<option value="2">Abmassador</option>
+						<option value="2">Ambassador</option>
 						<option value="3">Donor</option>
 						<option value="4">Influencer</option>
 					</select>
