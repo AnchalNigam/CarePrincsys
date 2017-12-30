@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2017 at 08:17 PM
+-- Generation Time: Dec 30, 2017 at 08:29 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -40,16 +40,16 @@ CREATE TABLE `user` (
   `contact` bigint(11) NOT NULL,
   `occupation` varchar(255) NOT NULL,
   `type` int(11) NOT NULL,
-  `domain` text NOT NULL
+  `domain` text NOT NULL,
+  `proimage` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `fullname`, `email`, `password`, `gender`, `address`, `state`, `city`, `contact`, `occupation`, `type`, `domain`) VALUES
-(6, 'Sakshi Nigam', 'saknigam12@gmail.com', 'b73a3203047396075ccac51f92358f6e', 'F', '2/5,colnelganj', 'Uttar Pradesh', 'Allahabad', 2147483647, 'Web Developer', 4, 'Education'),
-(8, 'Anchal Nigam', 'anchalnigamm@gmail.com', '643b33d20fbe52d48538f4cd7b24f593', 'F', '2/6,kareli', 'Uttar Pradesh', 'Allahabad', 9026224948, 'Web Developer', 1, '');
+INSERT INTO `user` (`id`, `fullname`, `email`, `password`, `gender`, `address`, `state`, `city`, `contact`, `occupation`, `type`, `domain`, `proimage`) VALUES
+(8, 'Anchal Nigam', 'anchalnigamm@gmail.com', '643b33d20fbe52d48538f4cd7b24f593', 'F', '2/6,kareli', 'Uttar Pradesh', 'Allahabad', 9026224948, 'Web Developer', 1, '', 'program-img6.jpg');
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,11 @@ CREATE TABLE `userlog` (
 INSERT INTO `userlog` (`id`, `useremail`, `userip`, `logintime`, `logout`, `status`) VALUES
 (1, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-26 18:14:46', '26-12-2017 11:56:39 PM', 1),
 (2, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-26 18:28:44', '', 0),
-(3, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-26 18:29:03', '27-12-2017 12:00:26AM', 1);
+(3, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-26 18:29:03', '27-12-2017 12:00:26AM', 1),
+(4, 'anchalnigam@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-30 18:52:25', '', 0),
+(5, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-30 18:52:40', '31-12-2017 12:26:58AM', 1),
+(6, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-30 19:06:19', '31-12-2017 12:36:58AM', 1),
+(7, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2017-12-30 19:07:12', '31-12-2017 12:57:41AM', 1);
 
 --
 -- Indexes for dumped tables
@@ -99,13 +103,13 @@ ALTER TABLE `userlog`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
