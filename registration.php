@@ -16,10 +16,10 @@ if(isset($_POST['submit']))
 	$state=$_POST['state'];
 	$password=$_POST['password'];
 	$user=$_POST['usertype'];
-	if(isset($_POST['domain'])){
+	
 		$domain=$_POST['domain'];
-	}
-
+	
+    
 	$contact=$_POST['mob_no'];
 	
 	$occupation=$_POST['occupation'];

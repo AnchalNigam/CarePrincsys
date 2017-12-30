@@ -2,6 +2,8 @@
 session_start();
 	include_once('includes/header.php');
 	include('config.php');
+	$error="";
+	$success="";
 	if(isset($_POST['upload'])){
 	$profile_image=$_FILES['pic']['name'];
 	$profile_image_tmp=$_FILES['pic']['tmp_name'];
@@ -9,7 +11,50 @@ session_start();
 	$sql=mysqli_query($bd, "update user set proimage='$profile_image' where id='".$_SESSION['id']."'");
 		
 	}
+	if(isset($_POST['submit'])){
+		$current=$_POST['c_pwd'];
+		$new=$_POST['n_pwd'];
+		$confirm=$_POST['nc_pwd'];
+		$sql=mysqli_query($bd,"SELECT password FROM user where password='".md5($current)."' && id='".$_SESSION['id']."'");
+		$row=mysqli_fetch_array($sql);
+		$fetchpass=$row['password'];
+		if($fetchpass!=(md5($current))){
+			$error="Current Password does not match!!";
+		}
+		elseif($new!=$confirm) {
+			$error="Password and Confirm Password Field does not match!!";
+			
+			
+		}
+		else{
+			$con=mysqli_query($bd,"update user set password='".md5($new)."' where id='".$_SESSION['id']."'");
+			if($con){
+				$success="Paasword Changed Successful!!";
+			}
+			else{
+				$error="Sorry!Something went wrong!!";
+			}
+			
+		}
+}
+$successdetails="";
+$errordetails="";
+if(isset($_POST['detailsupdate'])){
+	$mob=$_POST['inp_mob'];
+	$address=$_POST['inp_addr'];
+	$city=$_POST['city'];
+	$state=$_POST['state'];
+	$query=mysqli_query($bd,"update user set contact='$mob',address='$address',city='$city',state='$state' where id='".$_SESSION['id']."'");
+	if($query){
+		$successdetails="Profile Information Successfully Updated!!";
+		
+	}
+	else{
+		$errordetails="Sorry!Something went wrong!!";
+		
+	}
 	
+}
 ?>
 
 <!-- =========================
@@ -57,12 +102,26 @@ session_start();
 				</div>
 				<button class="btn btn-sm btn-default" onclick="changePassword()">Change Password</button><br><br>
 					<p id="para">Click above button to change your account password</p>
-					<form action="#" method="post" style="display: none;" id="form">
+					<form action="profile.php" method="post" style="display: none;" id="form">
 						<input type="text" required name="c_pwd" style="border-radius: 2px;" placeholder="Current Password"><br><br>
 						<input type="text" required name="n_pwd" style="border-radius: 2px;" placeholder="New Password"><br><br>
 						<input type="text" required name="nc_pwd" style="border-radius: 2px;" placeholder="Confirm New Password"><br><br>
 						<input type="submit" name="submit" value="Update"><p id="para">Click to Update password</p>
-					</form>					
+					</form>		
+<?php if(!empty($error)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Oops!</strong>	<?php echo $error;?>
+									</div>
+<?php } ?>	
+<?php if(!empty($success)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Well done!</strong>	<?php echo $success;?>
+									</div>
+<?php } ?>					
 			</div>
 		</div>
 		<div class="row">
@@ -86,15 +145,33 @@ session_start();
 				
 				?></p></label><br>
 				<label>Mobile Number :<p id="mob"><?php echo $row['contact']; ?></p></label><br>
-				<form action="#" method="post">
+				<form action="profile.php" method="post">
 					<input style="display: none;border-radius: 2px;" placeholder="Mobile Number" type="text" name="inp_mob" id="inp_mob">
 				
 				<label style="color: green;">Address :<p id="addr"><?php echo $row['address'].",".$row['city'].",".$row['state']; ?></p></label><br>
 					<textarea style="display: none;border-radius: 2px;" cols="30" rows="3" placeholder="Address" type="text" name="inp_addr" id="inp_addr"></textarea><br>
-					<input type="submit" name="submit" id="submit" value="Update" class="btn btn-sm btn-default"  style="display: none;">
+					<label style="display: none;border-radius: 2px;" id="city" >City *
+					<input name="city"  required type="text"  placeholder="Kolkata,Bangalore.." class="mycls"></label>
+					<label style="display: none;border-radius: 2px;" id="state" >State *
+					<input name="state"  required type="text"  placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">	</label>
+					<input type="submit" name="detailsupdate" id="submit" value="Update" class="btn btn-sm btn-default"  style="display: none;">
 				</form>
 
 				<button onclick="details()" class="btn btn-default" id="det">Edit Details</button>
+				<?php if(!empty($errordetails)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Oops!</strong>	<?php echo $errordetails;?>
+									</div>
+<?php } ?>	
+<?php if(!empty($successdetails)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<strong>Well done!</strong>	<?php echo $successdetails;?>
+									</div>
+<?php } ?>	
 			</div>
 			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;">
 				<label style="color: green;">Write / Upload a new Post</label>
@@ -213,12 +290,16 @@ session_start();
 			var addr = document.getElementById('addr');
 			var inp_mob = document.getElementById('inp_mob');
 			var inp_addr = document.getElementById('inp_addr');
+			var city = document.getElementById('city');
+			var state = document.getElementById('state');
 			var submit = document.getElementById('submit');
 			var det = document.getElementById('det');
 			mob.style.display='none';
 			det.style.display='none';
 			addr.style.display='none';
 			inp_mob.style.display='block';
+			city.style.display='block';
+			state.style.display='block';
 			inp_addr.style.display='block';
 			submit.style.display='block';
 	}
