@@ -1,6 +1,6 @@
 <?php
 session_start();
-	include_once('header.php');
+	include_once('includes/header.php');
 	include('config.php');
 	if(isset($_POST['upload'])){
 	$profile_image=$_FILES['pic']['name'];
