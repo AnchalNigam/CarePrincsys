@@ -103,9 +103,10 @@ if(isset($_POST['detailsupdate'])){
 				<button class="btn btn-sm btn-default" onclick="changePassword()">Change Password</button><br><br>
 					<p id="para">Click above button to change your account password</p>
 					<form action="profile.php" method="post" style="display: none;" id="form">
-						<input type="text" required name="c_pwd" style="border-radius: 2px;" placeholder="Current Password"><br><br>
-						<input type="text" required name="n_pwd" style="border-radius: 2px;" placeholder="New Password"><br><br>
-						<input type="text" required name="nc_pwd" style="border-radius: 2px;" placeholder="Confirm New Password"><br><br>
+						<input type="text" required name="c_pwd" style="border-radius: 2px;" placeholder="Current Password" required><br><br>
+						<input type="text" required name="n_pwd" style="border-radius: 2px;" placeholder="New Password" minlength="8" maxlength="25"
+					title="Password should be between 8 - 25 letters"><br><br>
+						<input type="text" required name="nc_pwd" style="border-radius: 2px;" placeholder="Confirm New Password" required><br><br>
 						<input type="submit" name="submit" value="Update"><p id="para">Click to Update password</p>
 					</form>		
 <?php if(!empty($error)) 
@@ -146,12 +147,13 @@ if(isset($_POST['detailsupdate'])){
 				?></p></label><br>
 				<label>Mobile Number :<p id="mob"><?php echo $row['contact']; ?></p></label><br>
 				<form action="profile.php" method="post">
-					<input style="display: none;border-radius: 2px;" placeholder="Mobile Number" type="text" name="inp_mob" id="inp_mob">
+					<input style="display: none;border-radius: 2px;" placeholder="Mobile Number" type="text" name="inp_mob" id="inp_mob" pattern="[0-9]+" minlength="10"
+				maxlength="10" title="Please only enter digits">
 				
 				<label style="color: green;">Address :<p id="addr"><?php echo $row['address'].",".$row['city'].",".$row['state']; ?></p></label><br>
 					<textarea style="display: none;border-radius: 2px;" cols="30" rows="3" placeholder="Address" type="text" name="inp_addr" id="inp_addr"></textarea><br>
 					<label style="display: none;border-radius: 2px;" id="city" >City *
-					<input name="city"  required type="text"  placeholder="Kolkata,Bangalore.." class="mycls"></label>
+					<input name="city"  required type="text"  placeholder="Kolkata,Bangalore.." class="mycls"  pattern="[A-Za-z ]+" maxlength="65"></label>
 					<label style="display: none;border-radius: 2px;" id="state" >State *
 					<input name="state"  required type="text"  placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">	</label>
 					<input type="submit" name="detailsupdate" id="submit" value="Update" class="btn btn-sm btn-default"  style="display: none;">

@@ -146,7 +146,7 @@ else{
 					<h4>Address *</h4>
 					<input name="address" required type="text" id="address" placeholder="Your address..." class="mycls">
 					<h4>City *</h4>
-					<input name="city" required type="text" id="city" placeholder="Kolkata,Bangalore.." class="mycls">
+					<input name="city" required type="text" id="city" placeholder="Kolkata,Bangalore.."  pattern="[A-Za-z ]+" maxlength="65" class="mycls">
 					<h4>State *</h4>
 						<input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">					
 					<h4>Password *</h4>
