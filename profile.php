@@ -153,9 +153,9 @@ if(isset($_POST['detailsupdate'])){
 				<label style="color: green;">Address :<p id="addr"><?php echo $row['address'].",".$row['city'].",".$row['state']; ?></p></label><br>
 					<textarea style="display: none;border-radius: 2px;" cols="30" rows="3" placeholder="Address" type="text" name="inp_addr" id="inp_addr"></textarea><br>
 					<label style="display: none;border-radius: 2px;" id="city" >City *
-					<input name="city"  required type="text"  placeholder="Kolkata,Bangalore.." class="mycls"  pattern="[A-Za-z ]+" maxlength="65"></label>
+					<input name="city"  required type="text"  placeholder="Kolkata,Bangalore.." class="mycls"  pattern="[A-Za-z ]+" maxlength="65" title="City should only contain letters."></label>
 					<label style="display: none;border-radius: 2px;" id="state" >State *
-					<input name="state"  required type="text"  placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">	</label>
+					<input name="state"  required type="text"  placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls" title="State should only contain letters.">	</label>
 					<input type="submit" name="detailsupdate" id="submit" value="Update" class="btn btn-sm btn-default"  style="display: none;">
 				</form>
 

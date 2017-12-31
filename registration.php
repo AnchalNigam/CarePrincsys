@@ -146,9 +146,9 @@ else{
 					<h4>Address *</h4>
 					<input name="address" required type="text" id="address" placeholder="Your address..." class="mycls">
 					<h4>City *</h4>
-					<input name="city" required type="text" id="city" placeholder="Kolkata,Bangalore.."  pattern="[A-Za-z ]+" maxlength="65" class="mycls">
+					<input name="city" required type="text" id="city" placeholder="Kolkata,Bangalore.."  pattern="[A-Za-z ]+" maxlength="65" title="City should only contain letters." class="mycls">
 					<h4>State *</h4>
-						<input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" class="mycls">					
+						<input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" title="State should only contain letters." class="mycls">					
 					<h4>Password *</h4>
 					<input name="password" required type="password"  id="password" placeholder="Password" class="mycls" minlength="8" maxlength="25"
 					title="Password should be between 8 - 25 letters" >
@@ -164,13 +164,13 @@ else{
 					</select>
 					<div class="influencer hidden">
 					<h4>Domain</h4>
-					<input name="domain" type="text"  id="domain" placeholder="Domain" class="mycls">
+					<input name="domain" type="text"  id="domain" placeholder="Domain" pattern="[A-Za-z ]+" maxlength="65" title="Domain should only contain letters."  class="mycls">
 					</div>
 					<h4>Mobile No. *</h4>
 					<input name="mob_no" required type="text"  id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
 				maxlength="10" class="mycls" title="Please only enter digits">
 					<h4>Occupation *</h4>
-					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65" class="mycls">
+					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65" title="Occupation should not contain digits" class="mycls">
 					<br>
 					<input type="checkbox" name="checkbox" required>required><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
 					
