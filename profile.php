@@ -55,6 +55,26 @@ if(isset($_POST['detailsupdate'])){
 	}
 	
 }
+$successview="";
+$errorview="";
+
+if(isset($_POST['submitview'])){
+	$speak=$_POST['view'];
+	
+	$query=mysqli_query($bd,"insert into speaks(userid,speaks) values('".$_SESSION['id']."','$speak')");
+	if($query)
+	{
+		$successview="Thankyou for sharing your views with Care Princsys!!";
+		
+	}
+	else{
+		$errorview="Sorry!Something Went Wrong!!";
+		
+		
+	}
+	
+	
+}
 ?>
 
 <!-- =========================
@@ -71,10 +91,10 @@ if(isset($_POST['detailsupdate'])){
 				<?php $query=mysqli_query($bd,"select proimage from user where id='".$_SESSION['id']."'"); 
 				$row=mysqli_fetch_array($query);
 				 if(empty($row['proimage'])) { ?>
-				<img class="thumbnail" src="images/noimage.png">
+				<img class="thumbnail img-responsive" src="images/noimage.png" style="width:100%;height:auto">
 				 <?php }
                   else{				 ?>
-				  <img class="thumbnail" src="admin/userprofile_images/<?php echo $row['proimage']; ?>">
+				  <img class="thumbnail img-responsive" src="admin/userprofile_images/<?php echo $row['proimage'];?>" style="width:100%;height:auto">
 				  <?php } ?>
 				<form action="profile.php" method="post" enctype="multipart/form-data">
 					<div class="col-lg-6">
@@ -176,15 +196,29 @@ if(isset($_POST['detailsupdate'])){
 <?php } ?>	
 			</div>
 			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;">
-				<label style="color: green;">Write / Upload a new Post</label>
-				<form action="#" method="post" enctype="multipart/form-data">
-					<textarea rows="7" style="resize: none;" cols="55" class="thumbnail" placeholder="Decription of the Post. . ."></textarea>
+			<?php if(!empty($errorview)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<?php echo $errorview;?>
+									</div>
+<?php } ?>	
+<?php if(!empty($successview)) 
+{?>
+									<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert">×</button>
+									<?php echo $successview;?>
+									</div>
+<?php } ?>		
+				<label style="color: green;">Share your Views about Care Princsys..</label>
+				<form action="#" method="post">
+					<textarea rows="7" name="view" style="resize: none;" cols="55" class="thumbnail" placeholder="Write & Upload your views. . ."></textarea>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<input type="file" name="picture" value="Post Now">	
+						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"></div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<input type="submit" name="submit" value="Post Now" class="btn btn-xs btn-primary">
+						<input type="submit" name="submitview" value="Share it" class="btn btn-md btn-primary">
 					</div>
 					
 				</form>
@@ -213,18 +247,37 @@ if(isset($_POST['detailsupdate'])){
 				<p> 10 Donator Name </p> 
 			</div>
 			<!--Display one Post Here post by this user --> 
-			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;">
+			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;min-height:435px">
 				<br>
 				<div class="col-lg-6">
-					<a href="profile of user" style="font-size:16px;">Name of user who shared Post</a>
+					<a href="profile of user" style="font-size:16px;">Your Recent Speaks</a>
 				</div>
+				<?php $query=mysqli_query($bd,"select speaks,TimeCurrent from speaks where userid='".$_SESSION['id']."' limit 2");
+                   if(mysqli_num_rows($query)) {	
+                    while($row=mysqli_fetch_array($query)) {				   ?>
+				
 				<div class="col-lg-6">
-					<p>Date , Time of Post</p>
+				
+					
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><hr>
-					Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-					<img src="images/program-img1.jpg" alt="Image conatains this post" class="thumbnail">	
+				
+					<h3 style="font-family:garamond"><em>"<?php echo $row['speaks']; ?>"</em></h3>
+					<p class="pull-right"><cite>-<?php echo $row['TimeCurrent']; ?></cite></p>
 				</div>
+				
+				   <?php } ?>
+                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><hr>
+				   <a href="#" class="btn btn-md btn-info pull-right">See More</a>		
+				</div>   <?php				   }
+				  else { ?>
+					  	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><hr>
+						 
+						<img class=" img-responsive center-block" src="images/sad.jpg" style="width:50%;height:auto">
+						<h3 style="font-family:garamond"><em>"You have not shared any views till now!Care Princsys is waiting for it!!"</em></h3>
+						</div>
+					  
+				  <?php  }?>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 thumbnail" style="background-color: white;">
 				<center><label style="color: orange;">Recents Admin Notices </label></center><hr>

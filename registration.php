@@ -18,11 +18,12 @@ if(isset($_POST['submit']))
 	$user=$_POST['usertype'];
 	
 		$domain=$_POST['domain'];
-	
+	$confirmpass=$_POST['con_password'];
     
 	$contact=$_POST['mob_no'];
 	
 	$occupation=$_POST['occupation'];
+	if($confirmpass==$password) {
 	 $query1=mysqli_query($bd,"select email from user where email='$email'");
 	 
      if(mysqli_num_rows($query1)>0){
@@ -44,7 +45,10 @@ else{
 }
 		
 	}
-	
+	}
+	else{
+		$error="Password and Confirm Password does not match!!";
+	}
 	
 }
 
@@ -135,7 +139,7 @@ else{
 				<a href='#' class='close' data-dismiss='alert'>&times;</a>
 				<strong>$success</strong> </div>"; 
 				} ?>
-				<form action="registration.php" method="post" onsubmit="pass();">
+				<form action="registration.php" method="post">
 					<h4>Name *</h4>
 					<input name="name" required type="text"  id="name" placeholder="Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" class="mycls" >
 					<h4>Email *</h4>
