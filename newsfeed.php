@@ -1,3 +1,14 @@
+<?php 
+
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+include('config.php');
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,19 +20,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/profile.css">
+
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/owl.theme.css">
 <link rel="stylesheet" href="css/owl.carousel.css">
-
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
 <!-- Main css -->
 <link rel="stylesheet" href="css/style.css">
 
 <!-- Google Font -->
 <link href='https://fonts.googleapis.com/css?family=Poppins:400,500,600' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="js/validate.js"></script>
+<script src="js/jquery.js"></script>
+<script src="myfunction.js" type="text/javascript">
+
+</script>
+
+
 </head>
 <body style="background-color: #f1eeee;">
 <!-- =========================
@@ -72,45 +88,260 @@
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 thumbnail" style="background-color: white">
 				<div>
 					<h4 class="text-success">Recent News Posts</h4><hr>
-					<label class="text-info">News Titel 1</label><!--News title-->
+					<ul class="nav nav-tabs nav-justified">
+						<li class="active"><a data-toggle="tab" href="#international" title="International"><i class="fa fa-globe" aria-hidden="true"> </i></a></li>
+						<li><a data-toggle="tab" href="#national" title="National"><i class="fa fa-flag" aria-hidden="true"></i></a></li>
+						<li><a data-toggle="tab" href="#medical" title="Health and Medical"><i class="fa fa-heartbeat" aria-hidden="true"></i></a></li>
+						<li><a data-toggle="tab" href="#education" title="Education"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a></li>
+						<li><a data-toggle="tab" href="#entertainment" title="Entertainment"><i class="fa fa-video-camera" aria-hidden="true"></i></a></li>
+						
+					  </ul>
+										
+					<div class="tab-content">
+					<script> fetchinternational(); </script>
+					 <div id="international" class="tab-pane fade in active">
+					 
+					<div id="news1">
+					<div class="news-title text-info"></div><!--News title-->
 					<!--News info here-->
-					<span>News Time, Date </span>
-					<p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					<!--If News Conatins any image then display it-->
-					<img src="images/register-bg.jpg" class="img img-thumbnail">
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
-
-					<label class="text-info">News Titel 2</label><!--News title-->
+                    </div>
+					<div id="news2">
+					<div class="news-title text-info"></div><!--News title-->
 					<!--News info here-->
-					<span>News Time, Date </span>
-					<p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					<!--If News Conatins any image then display it-->
-					<img src="images/register-bg.jpg" class="img img-thumbnail">
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
-
-					<label class="text-info">News Titel 3</label><!--News title-->
+                    </div>
+					<div id="news3">
+					<div class="news-title text-info"></div><!--News title-->
 					<!--News info here-->
-					<span>News Time, Date </span>
-					<p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					<!--If News Conatins any image then display it-->
-					<img src="images/register-bg.jpg" class="img img-thumbnail">	
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
-					<label class="text-info">News Titel 4</label><!--News title-->
+                    </div>
+					<div id="news4">
+					<div class="news-title text-info"></div><!--News title-->
 					<!--News info here-->
-					<span>News Time, Date </span>
-					<p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					<!--If News Conatins any image then display it-->
-					<img src="images/register-bg.jpg" class="img img-thumbnail">	
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
-					<label class="text-info">News Titel 5</label><!--News title-->
+                    </div>
+					<div id="news5">
+					<div class="news-title text-info"></div><!--News title-->
 					<!--News info here-->
-					<span>News Time, Date </span>
-					<p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					<!--If News Conatins any image then display it-->
-					<img src="images/register-bg.jpg" class="img img-thumbnail">	
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+				</div><!--international end-->	
+				<script> fetchnational(); </script>
+				<div id="national" class="tab-pane fade">
+					<div id="news1">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news2">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news3">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news4">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news5">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+				</div><!--national end-->	
+				<script> fetchmedical(); </script>
+				<div id="medical" class="tab-pane fade">
+					<div id="news1">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em></em></div><br/>
+					<div class="news-info"><p></p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news2">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news3">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news4">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news5">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+				</div><!--medical end-->	
+				<script> fetcheducation(); </script>
+				<div id="education" class="tab-pane fade">
+					<div id="news1">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news2">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news3">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news4">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news5">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+				</div><!--education end-->	
+				<script> fetchentertainment(); </script>
+				<div id="entertainment" class="tab-pane fade">
+					<div id="news1">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news2">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news3">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news4">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+					<div id="news5">
+					<div class="news-title text-info"></div><!--News title-->
+					<!--News info here-->
+					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
+					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					</div><!--If News Conatins any image then display it
+					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
+					<hr>
+                    </div>
+				</div><!--entertainment end-->	
 					
-				</div>
-				
+				</div><!-- end tab content-->
+			  </div>
 			</div>
 			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;">
 				<label style="color: green;">Write / Upload a new Post</label>
@@ -218,72 +449,27 @@
 				</div>
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 thumbnail" style="background-color: white">
+			
 				<h4 class="text-danger">Recent Speakers</h4><hr>
+				<?php $query=mysqli_query($bd,"select speaks.speaks,user.fullname from speaks join user on speaks.userid=user.id limit 3");
+                   if(mysqli_num_rows($query)) {	
+                    while($row=mysqli_fetch_array($query)) {				   ?>
+				
 				<div>
-					<label><a href="">Speaker Name 1</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 2</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 3</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 4</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 5</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 6</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 7</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 8</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 9</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 10</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 11</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 12</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
-				<div>
-					<label><a href="">Speaker Name 13</a></label>_Speaks Date , time
-					<!--His/Her Speaks-->
-					<p>technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems, opportunities outside of core investing given its technology strength.</p>
-				</div>
+					
+					<h4 style="font-family:garamond"><em>"<?php echo $row['speaks']; ?>"</em></h4>
+				<p class="pull-right"><cite>-<a href=""></a><?php echo $row['fullname']; ?></cite></p>
+				</div><br/><br/>
+				   <?php }  ?>
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><hr>
+				   <a href="#" class="text-info">See More</a>		
+				   </div>   <?php	}else { ?>
+					   <div>
+					   <img class=" img-responsive center-block" src="images/sad.jpg" style="width:50%;height:auto">
+						<h4 style="font-family:garamond"><em>"You have not shared any views till now!Care Princsys is waiting for it!!"</em></h4>
+					   </div>
+				<?php   }					   ?>
+				
 			</div>			
 	</div>
 </section>
@@ -417,13 +603,19 @@
 <!-- =========================
      SCRIPTS   
 ============================== -->
-<script src="js/jquery.js"></script>
+
 <script src="js/bootstrap.min.js"></script>
+
 <script src="js/jquery.parallax.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+
+</script>
+
 
 </body>
 </html>
