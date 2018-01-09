@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2018 at 07:43 AM
+-- Generation Time: Jan 09, 2018 at 03:56 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `careprincsys`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `contactno` bigint(11) NOT NULL,
+  `creationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updationDate` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `contactno`, `creationDate`, `updationDate`) VALUES
+(4, 'anchal', '84d4e9e1a13e7169a76f4d5b4196221a', 9026224948, '2018-01-06 01:44:41', '');
 
 -- --------------------------------------------------------
 
@@ -62,19 +84,21 @@ CREATE TABLE `user` (
   `occupation` varchar(255) NOT NULL,
   `type` int(11) NOT NULL,
   `domain` text NOT NULL,
-  `proimage` text NOT NULL
+  `proimage` text NOT NULL,
+  `reg Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updation date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `fullname`, `email`, `password`, `gender`, `address`, `state`, `city`, `contact`, `occupation`, `type`, `domain`, `proimage`) VALUES
-(8, 'Anchal Nigam', 'anchalnigamm@gmail.com', '643b33d20fbe52d48538f4cd7b24f593', 'F', '2/6,Kareli', 'Uttar Pradesh', 'Allahabad', 9026224948, 'Web Developer', 1, '', 'program-img6.jpg'),
-(11, 'Sakshi Nigam', 'saknigam12@gmail.com', 'b73a3203047396075ccac51f92358f6e', 'F', '2/5,Kareli', 'Uttar Pradesh', 'Allahabad', 9026224945, 'Web Developer', 2, '', ''),
-(13, 'Debjani Banerjee', 'debjani12@gmail.com', '55afb21cd8a852af644cffca40995792', 'F', '2/3,colnelganj', 'Uttar Pradesh', 'Allahabad', 9026224947, 'Phd Scholar', 4, 'Health ', ''),
-(15, 'Moin Gadkari', 'gadmoin@gmail.com', '0b1e829c02623fe1e846b531b9b2a6c2', 'M', 'R.no : 02 Ayesha Mension,Rabodi', 'Maharastra', 'Thane', 9415367430, 'Full Stack Developer', 4, 'Health ', ''),
-(17, 'Shinchan', 'shinchan@gmail.com', '7c9515c20d806973c6b7431bc8ffe070', 'M', 'block-2,colneganj', 'uttar pradesh', 'allahabad', 9026224948, 'web developer', 1, '', 'speakers-img2.jpg');
+INSERT INTO `user` (`id`, `fullname`, `email`, `password`, `gender`, `address`, `state`, `city`, `contact`, `occupation`, `type`, `domain`, `proimage`, `reg Date`, `updation date`) VALUES
+(8, 'Anchal Nigam', 'anchalnigamm@gmail.com', '643b33d20fbe52d48538f4cd7b24f593', 'F', '2/6,Kareli', 'Uttar Pradesh', 'Allahabad', 9026224948, 'Web Developer', 1, '', 'program-img6.jpg', '2018-01-02 19:26:01', ''),
+(11, 'Sakshi Nigam', 'saknigam12@gmail.com', 'b73a3203047396075ccac51f92358f6e', 'F', '2/5,Kareli', 'Uttar Pradesh', 'Allahabad', 9026224945, 'Web Developer', 2, '', '', '2018-01-02 19:26:01', ''),
+(13, 'Debjani Banerjee', 'debjani12@gmail.com', '55afb21cd8a852af644cffca40995792', 'F', '2/3,colnelganj', 'Uttar Pradesh', 'Allahabad', 9026224947, 'Phd Scholar', 4, 'Health ', '', '2018-01-02 19:26:01', ''),
+(15, 'Moin Gadkari', 'gadmoin@gmail.com', '0b1e829c02623fe1e846b531b9b2a6c2', 'M', 'R.no : 02 Ayesha Mension,Rabodi', 'Maharastra', 'Thane', 9415367430, 'Full Stack Developer', 4, 'Health ', '', '2018-01-02 19:26:01', ''),
+(17, 'Shinchan', 'shinchan@gmail.com', '7c9515c20d806973c6b7431bc8ffe070', 'M', 'block-2,colneganj', 'uttar pradesh', 'allahabad', 9026224948, 'web developer', 1, '', 'speakers-img2.jpg', '2018-01-02 19:26:01', '');
 
 -- --------------------------------------------------------
 
@@ -117,6 +141,12 @@ INSERT INTO `userlog` (`id`, `useremail`, `userip`, `logintime`, `logout`, `stat
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `speaks`
 --
 ALTER TABLE `speaks`
@@ -137,6 +167,12 @@ ALTER TABLE `userlog`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `speaks`
