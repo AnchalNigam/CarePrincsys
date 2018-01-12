@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2018 at 03:56 AM
+-- Generation Time: Jan 12, 2018 at 09:06 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -43,6 +43,79 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`, `contactno`, `creationDate`, `updationDate`) VALUES
 (4, 'anchal', '84d4e9e1a13e7169a76f4d5b4196221a', 9026224948, '2018-01-06 01:44:41', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `donation`
+--
+
+CREATE TABLE `donation` (
+  `id` int(11) NOT NULL,
+  `postid` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` varchar(255) NOT NULL,
+  `pin` int(11) NOT NULL,
+  `phone` bigint(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `weight` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  `donationTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `donation`
+--
+
+INSERT INTO `donation` (`id`, `postid`, `name`, `email`, `address`, `city`, `state`, `pin`, `phone`, `type`, `weight`, `amount`, `comment`, `donationTime`) VALUES
+(8, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aa', '2018-01-12 18:04:37'),
+(9, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aa', '2018-01-12 18:05:15'),
+(13, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aaa', '2018-01-12 18:16:17'),
+(14, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aaa', '2018-01-12 18:17:55'),
+(15, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aa', '2018-01-12 18:19:39'),
+(16, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aaa', '2018-01-12 18:23:52'),
+(17, 6, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aa', '2018-01-12 18:43:45'),
+(18, 0, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aaa', '2018-01-12 18:44:16'),
+(19, 6, 'anchal', 'anchalnigam@gmail.com', '2/5,kareli', 'allahabad', 'uttar pradesh', 211003, 9026224948, 0, '250g', '', 'aa', '2018-01-12 18:44:46'),
+(20, 0, 'sakshi Nigam', 'shinchan@gmail.com', '2/6,kareli', 'kolkata', 'uttar pradesh', 211002, 9415367430, 0, '250g', '', 'aaa', '2018-01-12 18:46:07'),
+(21, 0, 'sakshi Nigam', 'shinchan@gmail.com', '2/6,kareli', 'kolkata', 'uttar pradesh', 211002, 9415367430, 0, '250g', '', 'aaa', '2018-01-12 20:04:47');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `status` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `donationNeed` varchar(255) NOT NULL,
+  `timepost` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updationTime` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `userid`, `status`, `image`, `donationNeed`, `timepost`, `updationTime`) VALUES
+(18, 8, 'aaa', '', 'no', '2018-01-12 18:03:48', ''),
+(19, 8, 'grat', '', 'no', '2018-01-12 18:05:43', ''),
+(20, 8, 'aa', '', 'no', '2018-01-12 18:08:56', ''),
+(21, 8, 'aaaa', '', 'no', '2018-01-12 18:10:21', ''),
+(22, 8, 'gre', '', 'no', '2018-01-12 18:16:57', ''),
+(23, 8, 'aaaa', '', 'no', '2018-01-12 18:17:25', ''),
+(24, 8, 'donate', '', 'no', '2018-01-12 18:19:07', ''),
+(25, 8, 'great', '', 'yes', '2018-01-12 18:23:05', ''),
+(26, 8, 'donate', '', 'yes', '2018-01-12 18:24:20', ''),
+(27, 8, 'aaa', '', 'yes', '2018-01-12 18:43:14', ''),
+(28, 8, 'dont know', '', 'yes', '2018-01-12 18:48:58', '');
 
 -- --------------------------------------------------------
 
@@ -134,7 +207,15 @@ INSERT INTO `userlog` (`id`, `useremail`, `userip`, `logintime`, `logout`, `stat
 (12, 'shinchan@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-01 04:08:57', '01-01-2018 09:39:02AM', 1),
 (13, 'shinchan@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-01 04:16:58', '01-01-2018 09:49:28AM', 1),
 (14, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-01 04:19:45', '01-01-2018 12:08:01PM', 1),
-(15, 'shinchan@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-01 06:38:28', '01-01-2018 12:08:42PM', 1);
+(15, 'shinchan@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-01 06:38:28', '01-01-2018 12:08:42PM', 1),
+(16, 'anchalnigam@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 01:13:52', '', 0),
+(17, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 01:14:10', '', 1),
+(18, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 04:41:10', '12-01-2018 01:47:06PM', 1),
+(19, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 08:27:49', '12-01-2018 03:42:01PM', 1),
+(20, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 10:12:16', '', 1),
+(21, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 17:35:53', '12-01-2018 11:28:33PM', 1),
+(22, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 17:58:46', '12-01-2018 11:45:05PM', 1),
+(23, 'anchalnigamm@gmail.com', 0x3a3a3100000000000000000000000000, '2018-01-12 18:15:34', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -144,6 +225,18 @@ INSERT INTO `userlog` (`id`, `useremail`, `userip`, `logintime`, `logout`, `stat
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `donation`
+--
+ALTER TABLE `donation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -175,6 +268,18 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `donation`
+--
+ALTER TABLE `donation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
 -- AUTO_INCREMENT for table `speaks`
 --
 ALTER TABLE `speaks`
@@ -190,7 +295,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `userlog`
 --
 ALTER TABLE `userlog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -43,7 +43,7 @@
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#intro" class="smoothScroll">News Feed</a></li>
+				<li><a href="newsfeed.php" class="smoothScroll">News Feed</a></li>
 				<li><a href="logout.php">Logout</a></li>
 				<li><a href="#contact" class="smoothScroll">Contact</a></li>
 			</ul>

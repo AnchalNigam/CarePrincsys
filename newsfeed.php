@@ -1,13 +1,20 @@
 <?php 
-
 session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include('config.php');
+include('rss.php');
+
+	
+
+
+
 
 
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +27,9 @@ include('config.php');
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="css/bootstrap.min.css">
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>	 
+ 
 <link rel="stylesheet" href="css/animate.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/owl.theme.css">
@@ -39,6 +48,7 @@ include('config.php');
 
 
 </head>
+
 <body style="background-color: #f1eeee;">
 <!-- =========================
      NAVIGATION LINKS     
@@ -53,16 +63,22 @@ include('config.php');
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 			</button>
-			<a href="#" class="navbar-brand">Care Princsys</a>
+			<a href="index.php" class="navbar-brand">Care Princsys</a>
 		</div>
 
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="profile.php">Name of User</a></li>
-				<li><a href="newsfeed.php">Home</a></li>
+			
+			<?php 
+			  if(isset($_SESSION['login'])!=0) {  
+			 $query=mysqli_query($bd,"select fullname from user where id='".$_SESSION['id']."'"); 
+				$row=mysqli_fetch_array($query); ?>
+			  <li><a href="profile.php"><?php echo $row['fullname']; ?></a></li> <?php } ?>
+			  
+				<li><a href="index.php">Home</a></li>
 				<li><a href="#"><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button></a></li>
-				<li><a href="logout.php">Logout</a></li>
+				<?php  if(isset($_SESSION['login'])!=0) {  ?><li><a href="logout.php">Logout</a></li> <?php } ?>
 				<li><a href="#contact" class="smoothScroll">Contact</a></li>
 			</ul>
 		</div>
@@ -98,284 +114,147 @@ include('config.php');
 					  </ul>
 										
 					<div class="tab-content">
-					<script> fetchinternational(); </script>
+					 <?php $feed="http://feeds.bbci.co.uk/news/world/rss.xml";
+					 $news=feednews($feed);
+					   ?>
+					<!--<script> fetchinternational(); </script>-->
 					 <div id="international" class="tab-pane fade in active">
 					 
+					 <?php 
+					    for($j=0;$j<5;$j++) {
+							?>
 					<div id="news1">
-					<div class="news-title text-info"></div><!--News title-->
+					<a href="<?php echo $news[$j][1]; ?>"><div class="news-title text-info"><?php echo $news[$j][0]; ?></div></a><!--News title-->
 					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					<div class="pub-date pull-right"><em><?php echo $news[$j][2];  ?></em></div><br/>
+					<div class="news-info"><p><?php echo $news[$j][3]; ?></p>
 					</div><!--If News Conatins any image then display it
 					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
                     </div>
-					<div id="news2">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news3">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news4">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news5">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
+						<?php } ?>
+					
 				</div><!--international end-->	
-				<script> fetchnational(); </script>
+				
+				<?php $feed="https://timesofindia.indiatimes.com/rssfeedstopstories.cms";
+					 $news=feednews($feed);
+					   ?>
 				<div id="national" class="tab-pane fade">
-					<div id="news1">
-					<div class="news-title text-info"></div><!--News title-->
+					<?php 
+					    for($j=0;$j<5;$j++) { ?>
+							<div id="news1">
+					<a href="<?php echo $news[$j][1]; ?>"><div class="news-title text-info"><?php echo $news[$j][0]; ?></div></a><!--News title-->
 					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					<div class="pub-date pull-right"><em><?php echo $news[$j][2];  ?></em></div><br/>
+					<div class="news-info"><p><?php echo $news[$j][3]; ?></p>
 					</div><!--If News Conatins any image then display it
 					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
                     </div>
-					<div id="news2">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news3">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news4">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news5">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
+						<?php } ?>
+							
 				</div><!--national end-->	
-				<script> fetchmedical(); </script>
+				<?php $feed="https://timesofindia.indiatimes.com/rssfeeds/3908999.cms";
+					 $news=feednews($feed);
+					   ?>
 				<div id="medical" class="tab-pane fade">
-					<div id="news1">
-					<div class="news-title text-info"></div><!--News title-->
+					<?php 
+					    for($j=0;$j<5;$j++) { ?>
+							<div id="news1">
+					<a href="<?php echo $news[$j][1]; ?>"><div class="news-title text-info"><?php echo $news[$j][0]; ?></div></a><!--News title-->
 					<!--News info here-->
-					<div class="pub-date pull-right"><em></em></div><br/>
-					<div class="news-info"><p></p>
+					<div class="pub-date pull-right"><em><?php echo $news[$j][2];  ?></em></div><br/>
+					<div class="news-info"><p><?php echo $news[$j][3]; ?></p>
 					</div><!--If News Conatins any image then display it
 					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
                     </div>
-					<div id="news2">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news3">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news4">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news5">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
+						<?php } ?>
 				</div><!--medical end-->	
-				<script> fetcheducation(); </script>
+				<?php $feed="https://timesofindia.indiatimes.com/rssfeeds/913168846.cms";
+					 $news=feednews($feed);
+					   ?>
 				<div id="education" class="tab-pane fade">
-					<div id="news1">
-					<div class="news-title text-info"></div><!--News title-->
+					<?php 
+					    for($j=0;$j<5;$j++) { ?>
+							<div id="news1">
+					<a href="<?php echo $news[$j][1]; ?>"><div class="news-title text-info"><?php echo $news[$j][0]; ?></div></a><!--News title-->
 					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					<div class="pub-date pull-right"><em><?php echo $news[$j][2];  ?></em></div><br/>
+					<div class="news-info"><p><?php echo $news[$j][3]; ?></p>
 					</div><!--If News Conatins any image then display it
 					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
                     </div>
-					<div id="news2">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news3">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news4">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news5">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
+						<?php } ?>
 				</div><!--education end-->	
-				<script> fetchentertainment(); </script>
+				<?php $feed="https://timesofindia.indiatimes.com/rssfeeds/1081479906.cms";
+					 $news=feednews($feed);
+					   ?>
 				<div id="entertainment" class="tab-pane fade">
-					<div id="news1">
-					<div class="news-title text-info"></div><!--News title-->
+					<?php 
+					    for($j=0;$j<5;$j++) { ?>
+							<div id="news1">
+					<a href="<?php echo $news[$j][1]; ?>"><div class="news-title text-info"><?php echo $news[$j][0]; ?></div></a><!--News title-->
 					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
+					<div class="pub-date pull-right"><em><?php echo $news[$j][2];  ?></em></div><br/>
+					<div class="news-info"><p><?php echo $news[$j][3]; ?></p>
 					</div><!--If News Conatins any image then display it
 					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
 					<hr>
                     </div>
-					<div id="news2">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news3">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news4">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
-					<div id="news5">
-					<div class="news-title text-info"></div><!--News title-->
-					<!--News info here-->
-					<div class="pub-date pull-right"><em>News Time, Date </em></div><br/>
-					<div class="news-info"><p>At D. E. Shaw India, we stand at the intersection of Finance and Technology. Our firm has been built in part by attempting to do what other companies might consider impossible, or never imagine at all. The technology groups work on a variety of projects, including real-time financial data-feed infrastructure, high performance middleware, interactive trading systems,  opportunities outside of core investing given its technology strength.</p>
-					</div><!--If News Conatins any image then display it
-					<img src="images/register-bg.jpg" class="img img-thumbnail">-->
-					<hr>
-                    </div>
+						<?php } ?>
 				</div><!--entertainment end-->	
 					
 				</div><!-- end tab content-->
 			  </div>
 			</div>
 			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 thumbnail" style="background-color: white;">
+			<?php if(isset($_SESSION['login'])!=0) {  ?>
 				<label style="color: green;">Write / Upload a new Post</label>
-				<form action="#" method="post" enctype="multipart/form-data">
-					<textarea rows="7" style="resize: none;color:green;" cols="55" class="thumbnail" placeholder="Decription of the Post. . ."></textarea>
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-						<input type="file" name="picture" value="Post Now">	
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></div>
+				<form action="newsfeed.php" method="post" enctype="multipart/form-data">
+					<textarea rows="7" style="resize: none;color:green;" cols="55" class="thumbnail" name="status" required ></textarea> 
+					
+					<div id="body-bottom">
+					   <img src="#"  style="height:auto;width::100%" class="hidden img-responsive" id="preview"/>
+					   </div>
+					  
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						Donation Requires<select id="need">
-							
-							<option>Yes</option>
-							<option>NO</option>
+						<input type="file"  onchange="readURL(this);" style="display:none;" name="post_image" id="uploadFile" accept=".jpeg,.jpg,.png,.gif" >
+                        <img src="images/add.png" style="width:30px;height:30px"></img><a href="#" id="uploadTrigger" name="post_image">Add Photo</a>
+						<span class="rule" style="cursor:pointer">**</span>
+					</div>
+					
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						Donation Requires<select id="need" name="donate" required>
+							<option value="">Select</option>
+							<option value="yes">Yes</option>
+							<option value="no">NO</option>
 						</select>
 					</div>
-					<div>
-						<input type="submit" name="submit" value="Post Now" class="btn btn-xs btn-success">
+					<div >
+						<input type="submit" name="post" value="Post Now" class="btn btn-md btn-success">
 					</div>				
 				</form>
 				<hr>
-
+			<?php } ?>
 				<!-- All the latest post will be shown here -->
 				<div>
 					<br>
-					<div class="col-lg-6">
-						<a href="profile of user" style="font-size:16px;">Name of user 1 who shared Post</a>
+					<?php $query=mysqli_query($bd,"select posts.*,user.fullname from posts join user on user.id=posts.userid");
+                        if(mysqli_num_rows($query)>0) 	{	
+                        while($row=mysqli_fetch_array($query)) {						?>
+					<div class="col-lg-12">
+					
+						<a href="profile of user" style="font-size:16px;"><?php echo $row['fullname']; ?> has Posted</a>
 					</div>
-					<div class="col-lg-6">
-						<p>Date , Time of Post</p>
+					<div class="col-lg-12">
+						<!--<p>Date , Time of Post</p>-->
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-						<img src="images/program-img3.jpg" alt="Image conatains this post" class="thumbnail">
+						<?php echo $row['status']; ?><br><br>
+						<?php if(!empty($row['image'])) { ?>
+						<img src="admin/post_images/<?php echo $row['image']; ?>" alt="Image conatains this post" class="thumbnail"> <?php } ?>
 						<div>
 							<button class="btn btn-xs btn-default" onclick="cmt_btn()" id="comment_btn">comment</button>
 							<form action="#" method="post" id="comment" style="display: none;">
@@ -385,66 +264,20 @@ include('config.php');
 								<br>
 							</form>
 						</div>
+						
 						<!--If post contains requirment Donation the Display this Button--><br>
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button>
+						<?php if($row['donationNeed']=='yes') { ?>
+						<a href="#myModal" class="btn btn-primary btn-sm" data-toggle="modal">Donate Now</a> 
+	
+  <?php } ?>
 						<hr>	
 					</div>
 					<br>
-					<div class="col-lg-6">
-						<a href="profile of user" style="font-size:16px;">Name of user 2 who shared Post</a>
-					</div>
-					<div class="col-lg-6">
-						<p>Date , Time of Post</p>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-						<img src="images/program-img3.jpg" alt="Image conatains this post" class="thumbnail">
-						<!--If post contains requirment Donation the Display this Button-->
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button>
-						<hr>	
-					</div>
-					<br>
-					<div class="col-lg-6">
-						<a href="profile of user" style="font-size:16px;">Name of user 3 who shared Post</a>
-					</div>
-					<div class="col-lg-6">
-						<p>Date , Time of Post</p>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-						<img src="images/program-img3.jpg" alt="Image conatains this post" class="thumbnail">
-						<!--If post contains requirment Donation the Display this Button-->
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button>
-						<hr>	
-					</div>
-					<br>
-					<div class="col-lg-6">
-						<a href="profile of user" style="font-size:16px;">Name of user 4 who shared Post</a>
-					</div>
-					<div class="col-lg-6">
-						<p>Date , Time of Post</p>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-						<img src="images/program-img3.jpg" alt="Image conatains this post" class="thumbnail">
-						<!--If post contains requirment Donation the Display this Button-->
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button>
-						<hr>	
-					</div>
-					<br>
-					<div class="col-lg-6">
-						<a href="profile of user" style="font-size:16px;">Name of user 5 who shared Post</a>
-					</div>
-					<div class="col-lg-6">
-						<p>Date , Time of Post</p>
-					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible<br><br>
-						<img src="images/program-img3.jpg" alt="Image conatains this post" class="thumbnail">
-						<!--If post contains requirment Donation the Display this Button-->
-						<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Donate Now</button>
-						<hr>	
-					</div>
+						<?php } }
+                    else{
+                    echo "No Posts has been shared!"; }						?>
+					
+					
 
 				</div>
 			</div>
@@ -484,35 +317,67 @@ include('config.php');
 		        <h4 class="modal-title" id="myModalLabel" style="color: green">Donar Information</h4>
 		      </div>
 		      <div class="modal-body">
-		        <form method="post" action="#">
+		        <form action="donatesuccess.php" method="post" >
 		          <div class="form-group">
 		            <label for="name">Name</label>
-		            <input type="text" class="form-control" id="name" placeholder="Enter Name" required="" onchange="validate_name()"/>
+		            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" required="" pattern="[A-Za-z . ]+" maxlength="65" title="Username should only contain letters. e.g. john"/>
 		            <p id="vname"></p>
 		          </div>
 		          
 		          <div class="form-group">
 		            <label for="email">Email address</label>
-		            <input type="email" class="form-control" id="email" placeholder="Enter email" required="" onchange="validate_email()"/>
+		            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required=""/>
 		            <p id="vmail"></p>
 		          </div>
 		          
 		          <div class="form-group">
 		            <label for="address">Address</label>
-		            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="" onchange="validate_address()"/>
+		            <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required=""/>
 		          </div>
-		          
+		          <div class="form-group">
+				  <label for="city">City</label>
+				  <input name="city" required type="text"  id="city" placeholder="Kolkata,Bangalore.."  pattern="[A-Za-z ]+" maxlength="65" title="City should only contain letters." class="form-control" >
+				  </div>
+				 <div class="form-group">
+				 <label for="state">State</label>
+				 <input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" title="State should only contain letters." class="form-control" >					
+				  </div>
+				  		          <div class="form-group">
+								  <label for="pin">PinCode</label>
+								  <input name="pin" required type="text"  id="pin" placeholder="PinCode" pattern="[0-9]+" minlength="6"
+				maxlength="6" class="form-control"  title="Please only enter 6 digits">
+				  </div>
 		          <div class="form-group">
 		            <label for="phone">Phone Number</label> 
 		            <div class="input-group">
 		               <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">+91</div>
-		               <input type="integer" class="form-control" id="phone" placeholder="" maxlength="10" required="" onchange="validate_phone()" />
+		               <input type="integer" class="form-control" name="phone" id="phone" placeholder="" required="" pattern="[0-9]+" minlength="10"
+				maxlength="10" title="Please only enter 10 digits"/>
 		            </div>
 		          </div>
-		          
 		          <div class="form-group">
+				    <label for="type">Donation Type</label> 
+					<select name="donationtype" class="form-control" id="donation_type" onChange="selectdonationtype(this.value);" required>
+						<option value="">Choose</option>
+						<option value="1">Clothes</option>
+						<option value="2">Study Materials</option>
+						<option value="3">Money</option>
+						<option value="4">Raw Food</option>
+					</select>
+				  </div>
+				  <div class="form-group weight hidden">
+				     <label for="weight">Approx. Weight</label>
+					  <input type="integer" name="weight" class="form-control" id="phone" placeholder="Approximate weight of your donation items"   pattern="^[a-zA-Z0-9.]+$" 
+				class="form-control"  title="Please only enter digits"/><span>Say 250g,1kg..</span>
+				  </div>
+		          <div class="form-group money hidden">
 		            <label for="amount">Donation Amount</label>
-		              <div class="btn-toolbar" style="padding-bottom: 10px;">  
+					<div class="input-group">
+					   <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">Rs.</div>
+		               <input type="integer" name="price" class="form-control" id="amount" placeholder="Enter Your Donation Amount" pattern="[0-9,]+" 
+				 title="Please only enter only digits">
+					   </div>
+		              <!--<div class="btn-toolbar" style="padding-bottom: 10px;">  
 		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(100)">100</button>
 		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(500)">500</button>
 		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(1000)">1000</button>
@@ -521,15 +386,19 @@ include('config.php');
 		              <div style="display: none;" id="amt" >
 		                    <div class="input-group">
 		                       <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">&#8377;</div>
-		                       <input type="integer" class="form-control" id="inp" onchange="validate_amount()" required=""/>
+		                       <input type="integer" class="form-control" id="inp" onchange="validate_amount()"/>
 		                    </div>
-		              </div>
+		              </div>-->
 		         </div>
 		          <div class="form-group">
 		            <label for="comment">Donation Comment</label>
-		            <input type="text" class="form-control" id="comment" required="" onchange="validate_comment()"/>
+		            <input type="text" class="form-control" name="comment" id="comment" required="" pattern="[A-Za-z . ]+" maxlength="65" title="Comments should only contain letters"/>
 		          </div>
-		          <button type="submit" class="btn btn-success" id="pay" disabled="">Proceed to pay</button>
+				  <div class="money hidden">
+		          <input type="submit" name="pay" value="Proceed to Payment" class="btn btn-success" id="pay" ></div>
+				  <div class="weight hidden">
+		          <input type="submit" name="donate" value="Donate" class="btn btn-success" id="donate" ></div>
+				  
 		        </form>
 		      </div>
 		      <div class="modal-footer">
@@ -542,6 +411,40 @@ include('config.php');
 </div>
 
 </section>
+
+
+<script>
+$('.rule').click(function(){
+	swal("Only .jpeg,.jpg,.png,.gif", "File Size should be less than 10 Mb")
+	
+	
+});
+$("#uploadTrigger").click(function(){
+           $("#uploadFile").click();
+        });
+		
+		function readURL(input) {
+                  if (input.files && input.files[0]) {
+					  if(!input.files[0].type.match('image.*')){
+						  swal("Only jpeg,jpg,png,gif allowed");
+						  
+					  }
+					   if(input.files[0].size>10485760){ //10Mb
+						   swal("File Size Should be less than 10 Mb");
+					  }
+					  else{
+                      var reader = new FileReader();
+
+                      reader.onload = function (e) {
+						  $('img').removeClass('hidden');
+                       $('#body-bottom').show();
+                          $('#preview').attr('src', e.target.result);
+                      }
+
+                      reader.readAsDataURL(input.files[0]);
+                  } }
+              }
+</script>
 <script>
 	function changePassword(){
 			var form = document.getElementById('form');
@@ -571,6 +474,105 @@ include('config.php');
 		b.style.display="block";
 	}
 </script>
+<?php 
+
+
+$error="";
+$success="";
+if(isset($_POST['post'])){
+	echo "post";
+	$status  = $_POST['status'];
+	$donate=$_POST['donate'];
+    if(!empty($_FILES['post_image']['name'])){
+		 $post_image=$_FILES['post_image']['name'];
+
+	$post_image_tmp=$_FILES['post_image']['tmp_name'];
+    move_uploaded_file($post_image_tmp,"admin/post_images/$post_image");
+	$sql=mysqli_query($bd, "insert into posts(userid,status,image,donationNeed) values('".$_SESSION['id']."','$status','$post_image','$donate')");
+	if($sql){
+		unset($_POST['post']);
+		echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Congratulaions!',
+                text: 'Posted Successfully.',
+                type: 'success',
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'newsfeed.php';
+            }, 1000);
+        });
+
+		
+		</script>";
+		
+		
+	}
+	else{
+		unset($_POST['post']);
+		echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Oops!',
+                text: 'Something Went wronf.Try Again!.',
+                type: 'Failure',
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'newsfeed.php';
+			
+            }, 1000);
+        });
+
+		
+		</script>";
+		
+	}
+	}
+	else{
+		$sql=mysqli_query($bd, "insert into posts(userid,status,donationNeed) values('".$_SESSION['id']."','$status','$donate')");
+	if($sql){
+		unset($_POST['post']);
+		echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Congratulaions!',
+                text: 'Posted Successfully.',
+                type: 'success',
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'newsfeed.php';
+            }, 1000);
+        });
+
+		
+		</script>";
+		
+		
+	}
+	else{
+		unset($_POST['post']);
+		echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Oops!',
+                text: 'Something Went wronf.Try Again!.',
+                type: 'Failure',
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'newsfeed.php';
+            }, 1000);
+        });
+
+		
+		</script>";
+		
+	}
+		
+		
+} }
+
+
+?>
 <!-- =========================
     FOOTER SECTION   
 ============================== -->

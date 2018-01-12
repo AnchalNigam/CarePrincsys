@@ -14,7 +14,7 @@
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#intro" class="smoothScroll">News Feed</a></li>
+				<li><a href="newsfeed.php" class="smoothScroll">News Feed</a></li>
 				<li><a href="#overview" class="smoothScroll">Overview</a></li>
 				<li><a href="#program" class="smoothScroll">Programs</a></li>
 				<?php if(isset($_SESSION['login'])==0) { ?>
