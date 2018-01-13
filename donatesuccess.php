@@ -66,7 +66,7 @@ if(isset($_POST['donate'])){
 	$weight=$_POST['weight'];
 	$price=$_POST['price'];
 	$comment=$_POST['comment'];
-	$sql=mysqli_query($bd, "insert into donation(name,email,address,city,state,pin,phone,type,weight,amount,comment) values('$Name','$email','$address','$city','$state','$pin','$phone','donation','$weight','$price','$comment')");
+	$sql=mysqli_query($bd, "insert into donation(name,email,address,city,state,pin,phone,type,weight,amount,comment) values('$Name','$email','$address','$city','$state','$pin','$phone','$donation','$weight','$price','$comment')");
 	if($sql){
 		unset($_POST['donate']);
 		echo "<script>
@@ -126,7 +126,7 @@ if(isset($_POST['donation'])){
 	$weight=$_POST['weight'];
 	$price=$_POST['price'];
 	$comment=$_POST['comment'];
-	$sql=mysqli_query($bd, "insert into donation(postid,name,email,address,city,state,pin,phone,type,weight,amount,comment) values('$postid','$Name','$email','$address','$city','$state','$pin','$phone','donation','$weight','$price','$comment')");
+	$sql=mysqli_query($bd, "insert into donation(postid,name,email,address,city,state,pin,phone,type,weight,amount,comment) values('$postid','$Name','$email','$address','$city','$state','$pin','$phone','$donation','$weight','$price','$comment')");
 	if($sql){
 		unset($_POST['donation']);
 		echo "<script>

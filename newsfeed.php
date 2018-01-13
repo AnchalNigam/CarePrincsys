@@ -264,11 +264,122 @@ include('rss.php');
 								<br>
 							</form>
 						</div>
-						
+						<textarea rows="7" style="resize: none;color:green;" cols="55" class="thumbnail hidden statuspost" ><?php echo $row['status']; ?></textarea> 
+						<input type="hidden" value="<? echo $row['id']; ?>" class="postid">
 						<!--If post contains requirment Donation the Display this Button--><br>
 						<?php if($row['donationNeed']=='yes') { ?>
-						<a href="#myModal" class="btn btn-primary btn-sm" data-toggle="modal">Donate Now</a> 
-	
+						<a href="#myModalpost<?php echo $row['id']; ?>" class="btn btn-primary btn-sm donatepost" data-toggle="modal">Donate Now</a> 
+		<div class="modal fade-scale" id="myModalpost<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel" style="color: green">Donar Information</h4>
+		      </div>
+		      <div class="modal-body">
+		        <form action="donatesuccess.php" method="post" >
+				<div class="form-group">
+		            <label for="postby">Post Status</label>
+		            <textarea rows="7" style="resize: none;color:green;" cols="55" class="thumbnail" name="status" readonly> <?php echo $row['status']; ?></textarea> 
+		            <p id="vname"></p>
+		          </div>
+				<div class="form-group">
+		            <label for="postby">Posted By</label>
+		            <input type="text" name="postby" class="form-control" id="postby" value="<?php echo $row['fullname']; ?>" placeholder="Enter Name" readonly>
+		            <p id="vname"></p>
+		          </div>
+		          <div class="form-group">
+		            <label for="name">Name</label>
+		            <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" required="" pattern="[A-Za-z . ]+" maxlength="65" title="Username should only contain letters. e.g. john"/>
+		            <p id="vname"></p>
+		          </div>
+				  <input type="hidden" name="postid" value="<?php echo $row['id']; ?>">
+		          
+
+				    
+		          <div class="form-group">
+		            <label for="email">Email address</label>
+		            <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" required=""/>
+		            <p id="vmail"></p>
+		          </div>
+		          
+		          <div class="form-group">
+		            <label for="address">Address</label>
+		            <input type="text" class="form-control" name="address" id="address" placeholder="1234 Main St" required=""/>
+		          </div>
+		          <div class="form-group">
+				  <label for="city">City</label>
+				  <input name="city" required type="text"  id="city" placeholder="Kolkata,Bangalore.."  pattern="[A-Za-z ]+" maxlength="65" title="City should only contain letters." class="form-control" >
+				  </div>
+				 <div class="form-group">
+				 <label for="state">State</label>
+				 <input name="state" required type="text"  id="state" placeholder="State" pattern="[A-Za-z ]+" maxlength="65" title="State should only contain letters." class="form-control" >					
+				  </div>
+				  		          <div class="form-group">
+								  <label for="pin">PinCode</label>
+								  <input name="pin" required type="text"  id="pin" placeholder="PinCode" pattern="[0-9]+" minlength="6"
+				maxlength="6" class="form-control"  title="Please only enter 6 digits">
+				  </div>
+		          <div class="form-group">
+		            <label for="phone">Phone Number</label> 
+		            <div class="input-group">
+		               <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">+91</div>
+		               <input type="integer" class="form-control" name="phone" id="phone" placeholder="" required="" pattern="[0-9]+" minlength="10"
+				maxlength="10" title="Please only enter 10 digits"/>
+		            </div>
+		          </div>
+		          <div class="form-group">
+				    <label for="type">Donation Type</label> 
+					<select name="donationtype" class="form-control" id="donation_type" onChange="selectdonationtype(this.value);" required>
+						<option value="">Choose</option>
+						<option value="1">Clothes</option>
+						<option value="2">Study Materials</option>
+						<option value="3">Money</option>
+						<option value="4">Raw Food</option>
+					</select>
+				  </div>
+				  <div class="form-group weight hidden">
+				     <label for="weight">Approx. Weight</label>
+					  <input type="integer" name="weight" class="form-control" id="phone" placeholder="Approximate weight of your donation items"   pattern="^[a-zA-Z0-9.]+$" 
+				class="form-control"  title="Please only enter digits"/><span>Say 250g,1kg..</span>
+				  </div>
+		          <div class="form-group money hidden">
+		            <label for="amount">Donation Amount</label>
+					<div class="input-group">
+					   <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">Rs.</div>
+		               <input type="integer" name="price" class="form-control" id="amount" placeholder="Enter Your Donation Amount" pattern="[0-9,]+" 
+				 title="Please only enter only digits">
+					   </div>
+		              <!--<div class="btn-toolbar" style="padding-bottom: 10px;">  
+		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(100)">100</button>
+		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(500)">500</button>
+		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(1000)">1000</button>
+		                <button type="button" class="btn btn-primary btn-lg active" onclick="showamount(0)">Other</button>
+		              </div>
+		              <div style="display: none;" id="amt" >
+		                    <div class="input-group">
+		                       <div class="input-group-addon" style="font-size: 15px;font-weight: bold;">&#8377;</div>
+		                       <input type="integer" class="form-control" id="inp" onchange="validate_amount()"/>
+		                    </div>
+		              </div>-->
+		         </div>
+		          <div class="form-group">
+		            <label for="comment">Donation Comment</label>
+		            <input type="text" class="form-control" name="comment" id="comment" required="" pattern="[A-Za-z . ]+" maxlength="65" title="Comments should only contain letters"/>
+		          </div>
+				  <div class="money hidden">
+		          <input type="submit" name="payment" value="Proceed to Payment" class="btn btn-success" id="pay" ></div>
+				  <div class="weight hidden">
+		          <input type="submit" name="donation" value="Donate" class="btn btn-success" id="donate" ></div>
+				  
+		        </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
   <?php } ?>
 						<hr>	
 					</div>
@@ -412,7 +523,23 @@ include('rss.php');
 
 </section>
 
+<section>
+	<div class="container">
+		<!-- Modal -->
+	
+  
+</div>
 
+</section>
+<script>
+$('.donatepost').on('click',function() {
+	console.log("yes");
+	var value=$('.statuspost').val();
+	console.log(value);
+	
+});
+
+</script>
 <script>
 $('.rule').click(function(){
 	swal("Only .jpeg,.jpg,.png,.gif", "File Size should be less than 10 Mb")
