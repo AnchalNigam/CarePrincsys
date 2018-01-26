@@ -3,8 +3,8 @@ session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include('config.php');
-$error="";
-$success="";
+$error=" ";
+$success=" ";
 if(isset($_POST['submit']))
 {
 	$Name=$_POST['name'];
@@ -19,7 +19,6 @@ if(isset($_POST['submit']))
 	
 		$domain=$_POST['domain'];
 	$confirmpass=$_POST['con_password'];
-    
 	$contact=$_POST['mob_no'];
 	
 	$occupation=$_POST['occupation'];

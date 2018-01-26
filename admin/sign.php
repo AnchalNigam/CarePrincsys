@@ -11,7 +11,6 @@ if(isset($_POST['submit']))
 	
 	$password=$_POST['password'];
 	$answer=$_POST['answer'];
-	
 		
 	
     
@@ -21,7 +20,8 @@ if(isset($_POST['submit']))
 	      
 
 		$password=md5($_POST['password']);
-		$query=mysqli_query($bd,"insert into admin(username,password,contactno) values('$Name','$password','$contact')");
+		$state ="insert into admin(username,password,contactno) values('$Name','$password','$contact')";
+		$query=mysqli_query($con,$state);
 		if($query)
 {
    
@@ -46,22 +46,19 @@ else{
 	
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>Princsys Admin Panel</title>
-
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
-
-
-    <!-- Bootstrap core CSS     -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>Princsys Inc - Care Princys</title>
+       <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
  <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
 
@@ -78,6 +75,7 @@ else{
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
      <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+
 </head>
 <body>
 
@@ -139,14 +137,14 @@ else{
 									<input class="span12" type="text"  name="answer" placeholder="CarePrincsys Security Answer" pattern="[A-Za-z ]+" maxlength="65" title="Hindustane Answer" required><br/><br/>
 									<br/><h5>Login Information</h5>
 									<input class="span12" type="text" name="name" placeholder="User Name" pattern="[A-Za-z ]+" maxlength="65" title="Username should only contain letters. e.g. john" required><br/><br/>
-									<input class="span12" type="text" name="password" placeholder="Password" minlength="8" maxlength="25"
+									<input class="span12" type="password" name="password" placeholder="Password" minlength="8" maxlength="25"
 					title="Password should be between 8 - 25 letters" required><br/><br/>
-									<input class="span12" type="text" name="con_password" placeholder="Confirm Password" required><br/><br/>
+									<input class="span12" type="password" name="con_password" placeholder="Confirm Password" required><br/><br/>
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls row-fluid">
-						<input class="span12 btn btn-primary" type="submit" name="submit">
+						<input class="span12 btn btn-primary" type="submit" name="submit" value="Sign-Up">
 								</div>
 							</div>
 						</div>
@@ -162,39 +160,5 @@ else{
 				</div>
 			</div>
 		</div>
-	</div><!--/.wrapper-->
-<div class="footer">
-		<div class="container">
-			 
-
-			<b class="copyright">&copy; 2018 Care Princsys </b> All rights reserved.
-		</div>
 	</div>
-	<!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-   
- <script src="assets/js/bootstrap.min.js"></script>
-
-    <!--  Checkbox, Radio & Switch Plugins -->
-    <script src="assets/js/bootstrap-checkbox-radio-switch.js"></script>
-
-    <!--  Charts Plugin -->
-    <script src="assets/js/chartist.min.js"></script>
-
-    <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
-    
-
-   
-
-    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-    <script src="assets/js/demo.js"></script>
-
-</html>
-
-</body>  
-  
-  
-  
+</body>

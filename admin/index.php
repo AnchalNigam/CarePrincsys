@@ -2,15 +2,19 @@
 session_start();
 error_reporting(0);
 include("include/config.php");
+$username = $_POST['user'];
+//echo $username;
+$password = md5($_POST['pass']);
+//echo $password;
 if(isset($_POST['submit']))
+$username = $_POST['user'];
+$password = md5($_POST['pass']);
 {
-	$username=$_POST['username'];
-	$password=md5($_POST['password']);
 $ret=mysqli_query($bd, "SELECT * FROM admin WHERE username='$username' and password='$password'");
 $num=mysqli_fetch_array($ret);
 if($num>0)
 {
-$extra="admin.html";//
+$extra="index.php";
 $_SESSION['alogin']=$_POST['username'];
 $_SESSION['id']=$num['id'];
 $host=$_SERVER['HTTP_HOST'];
@@ -33,11 +37,13 @@ exit();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <title>Princsys Admin Panel</title>
+    	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
+    <title>Princsys Inc - Care Princys</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -96,7 +102,7 @@ exit();
 		<div class="container">
 			<div class="row">
 				<div class="module module-login span4 offset4">
-					<form class="form-vertical" method="post">
+					<form class="form-vertical" method="POST" action="index.php">
 						<div class="module-head">
 							<h3>Sign In</h3>
 						</div>
@@ -104,19 +110,19 @@ exit();
 						<div class="module-body">
 							<div class="control-group">
 								<div class="controls row-fluid">
-									<input class="span12" type="text" id="inputEmail" name="username" placeholder="Username"  required>
+									<input type="text" name="user" class="span12" placeholder="Username">
 								</div>
 							</div>
 							<div class="control-group">
 								<div class="controls row-fluid">
-						<input class="span12" type="password" id="inputPassword" name="password" placeholder="Password" required>
+						<input class="span12" type="password" id="inputPassword" name="pass" placeholder="Password" required>
 								</div>
 							</div>
 						</div>
 						<div class="module-foot">
 							<div class="control-group">
 								<div class="controls clearfix">
-									<button type="submit" class="btn btn-primary pull-right" name="submit">Login</button>
+									<button type="submit" id="submit" class="btn btn-primary pull-right" name="submit" value="submit">Login</button>
 									
 								</div>
 							</div>
