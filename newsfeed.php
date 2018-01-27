@@ -607,7 +607,7 @@ $("#uploadTrigger").click(function(){
 $error="";
 $success="";
 if(isset($_POST['post'])){
-	echo "post";
+	
 	$status  = $_POST['status'];
 	$donate=$_POST['donate'];
     if(!empty($_FILES['post_image']['name'])){
