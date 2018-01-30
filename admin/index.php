@@ -2,10 +2,6 @@
 session_start();
 error_reporting(0);
 include("include/config.php");
-$username = $_POST['user'];
-//echo $username;
-$password = md5($_POST['pass']);
-//echo $password;
 if(isset($_POST['submit']))
 $username = $_POST['user'];
 $password = md5($_POST['pass']);

@@ -1,5 +1,8 @@
 <?php
-session_start();
+include("include/config.php");
+$id = $_GET['id'];
+echo $id;
+mysqli_query($bd,"DELETE FROM speaks WHERE id='".$id."'");
 ?>
 <html lang="en">
 
@@ -124,6 +127,36 @@ session_start();
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                    <?php 
+                        $sql ="SELECT * FROM speaks";
+                        $result= mysqli_query($bd,$sql);
+                        if(mysqli_num_rows($result) > 0 ) {
+
+        echo'<table class="table table-striped text-center">
+                                                <tr>
+                                                    <th>User id</th>
+                                                    <th>Speaks</th>
+                                                    <th>Action</th>
+                                                </tr>';
+            
+    while ($row = mysqli_fetch_array($result)) {
+    echo    '<tr>
+                <td>'.$row['userid'].'</td>
+                <td>'.$row['speaks'].'</td>
+                <td><a href="speaks.php?id='.$row['id'].'">Delete</a></td>
+            </tr>';
+
+
+            }
+        echo '</table>';
+        }
+    
+                    ?>
+
+                </div>
                 </div>
                 <!-- /.row -->
                 <!-- ============================================================== -->

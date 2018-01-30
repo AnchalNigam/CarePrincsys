@@ -1,5 +1,9 @@
 <?php
-session_start();
+error_reporting(0);
+include("include/config.php");
+$id = $_GET['id'];
+echo $id;
+mysqli_query($bd,"DELETE FROM donation WHERE id='".$id."'");
 ?>
 <html lang="en">
 
@@ -124,6 +128,43 @@ session_start();
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
+                </div>
+                <div class="row">
+                  <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> 
+                    <?php 
+                        $sql ="SELECT * FROM donation";
+                        $result= mysqli_query($bd,$sql);
+                        if(mysqli_num_rows($result) > 0 ) {
+
+        echo'<table class="table table-striped text-center">
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>E-mail</th>
+                                                    <th>Address</th>
+                                                    <th>City</th>
+                                                    <th>Weigth</th>
+                                                    <th>comment</th>
+                                                    <th>Action</th>
+                                                </tr>';
+            
+    while ($row = mysqli_fetch_array($result)) {
+    echo    '<tr>
+                <td>'.$row['name'].'</td>
+                <td>'.$row['email'].'</td>
+                <td>'.$row['address'].'</td>
+                <td>'.$row['city'].'</td>
+                <td>'.$row['weight'].'</td>
+                <td>'.$row['comment'].'</td>
+                <td><a href="donation.php?id='.$row['id'].'">Delete</a></td>
+            </tr>';
+
+
+            }
+        echo '</table>';
+        }
+    
+                    ?>
+                  </div>
                 </div>
                 <!-- /.row -->
                 <!-- ============================================================== -->
