@@ -122,7 +122,10 @@ else
 						<div class="module-head">
 							<h3>Sign In</h3>
 						</div>
-						
+						<?php 
+						if(isset($_SESSION['errmsg'])) { ?>
+							<span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
+						<?php } ?>
 						<div class="module-body">
 							<div class="control-group">
 								<div class="controls row-fluid">

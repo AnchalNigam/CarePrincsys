@@ -104,6 +104,8 @@ mysqli_query($bd,"DELETE FROM donation WHERE id='".$id."'");
                     <li>
                         <a href="speaks.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Speaks</a>
                     </li>
+                    <li>
+                        <a href="logout.php" class="waves-effect"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Logout</a>
                     </li>
 
                 </ul>
