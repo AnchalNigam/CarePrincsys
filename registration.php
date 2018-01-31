@@ -3,8 +3,8 @@ session_start();
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 include('config.php');
-$error=" ";
-$success=" ";
+$error="";
+$success="";
 if(isset($_POST['submit']))
 {
 	$Name=$_POST['name'];
@@ -173,7 +173,7 @@ else{
 					<input name="mob_no" required type="text"  id="mob_no" placeholder="Mobile Number" pattern="[0-9]+" minlength="10"
 				maxlength="10" class="mycls" title="Please only enter digits">
 					<h4>Occupation *</h4>
-					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z ]+" maxlength="65" title="Occupation should not contain digits" class="mycls">
+					<input name="occupation" required type="text"  id="occupation" placeholder="occupation"  pattern="[A-Za-z. ]+" maxlength="65" title="Occupation should not contain digits" class="mycls">
 					<br>
 					<input type="checkbox" name="checkbox" required>required><label style="margin-left:10px;position: relative;bottom: 18px;color:green;">Accept the <a href="#">Terms and Conditions</a></label>
 					

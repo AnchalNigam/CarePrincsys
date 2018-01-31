@@ -2,15 +2,73 @@
 session_start();
 	include_once('includes/header.php');
 	include('config.php');
+
+
+
 	$error="";
 	$success="";
-	if(isset($_POST['upload'])){
-	$profile_image=$_FILES['pic']['name'];
-	$profile_image_tmp=$_FILES['pic']['tmp_name'];
-    move_uploaded_file($profile_image_tmp,"admin/userprofile_images/$profile_image");
-	$sql=mysqli_query($bd, "update user set proimage='$profile_image' where id='".$_SESSION['id']."'");
+	
+		if(isset($_POST['upload'])){
+			if(!empty($_FILES['pic']['name'])) {
+				if($_FILES['pic']['size'] < 5242880) { //5 MB (size is also in bytes) {
+			$profile_image=$_FILES['pic']['name'];
+				$profile_image_tmp=$_FILES['pic']['tmp_name'];
+				move_uploaded_file($profile_image_tmp,"admin/userprofile_images/$profile_image");
+				$sql=mysqli_query($bd, "update user set proimage='$profile_image' where id='".$_SESSION['id']."'");
+                header('location:profile.php');
+				
+			}
+			else{
+				
+				echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Oops!',
+                text: 'File Size is more than 5MB',
+                   type: 'error' ,
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'profile.php';
+			
+            }, 1000);
+        });
+
 		
+		</script>";
+	
+				
+			}
+				}
+		else{
+			echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Oops!',
+                text: 'No file selected',
+                type: 'error' ,
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'profile.php';
+			
+            }, 1000);
+        });
+
+		
+		</script>";
+			
+		}
+}
+	if(isset($_POST['remove'])){
+		 $sql=mysqli_query($bd,"update user set proimage='' where id='".$_SESSION['id']."'");
+		  
+		if($sql){
+		header('location:profile.php');
+		}
+		else{
+			echo mysqli_error($bd);
+		}
 	}
+
 	if(isset($_POST['submit'])){
 		$current=$_POST['c_pwd'];
 		$new=$_POST['n_pwd'];
@@ -19,20 +77,76 @@ session_start();
 		$row=mysqli_fetch_array($sql);
 		$fetchpass=$row['password'];
 		if($fetchpass!=(md5($current))){
-			$error="Current Password does not match!!";
+			echo "<script>
+				setTimeout(function() {
+					swal({
+						title: 'Oops!',
+						text: 'Current Password does not match!',
+						type: 'error' ,
+						confirmButtonText: 'Ok'
+					}, function() {
+						window.location = 'profile.php';
+					
+					}, 1000);
+				});
+
+		
+		</script>";
 		}
 		elseif($new!=$confirm) {
-			$error="Password and Confirm Password Field does not match!!";
+			echo "<script>
+				setTimeout(function() {
+					swal({
+						title: 'Oops!',
+						text: 'Confirm Password and Password does not match!',
+						type: 'error' ,
+						confirmButtonText: 'Ok'
+					}, function() {
+						window.location = 'profile.php';
+					
+					}, 1000);
+				});
+
+		
+		</script>";
 			
 			
 		}
 		else{
 			$con=mysqli_query($bd,"update user set password='".md5($new)."' where id='".$_SESSION['id']."'");
 			if($con){
-				$success="Paasword Changed Successful!!";
+				echo "<script>
+					setTimeout(function() {
+						swal({
+							title: 'Congratulaions!',
+							text: 'Password changed Successfully.',
+							type: 'success',
+							confirmButtonText: 'Ok'
+						}, function() {
+							window.location = 'profile.php';
+						}, 1000);
+					});
+
+		
+		</script>";
+				
 			}
 			else{
-				$error="Sorry!Something went wrong!!";
+				echo "<script>
+				setTimeout(function() {
+					swal({
+						title: 'Oops!',
+						text: 'Something!went wrong.',
+						type: 'error' ,
+						confirmButtonText: 'Ok'
+					}, function() {
+						window.location = 'profile.php';
+					
+					}, 1000);
+				});
+
+		
+		</script>";
 			}
 			
 		}
@@ -46,11 +160,38 @@ if(isset($_POST['detailsupdate'])){
 	$state=$_POST['state'];
 	$query=mysqli_query($bd,"update user set contact='$mob',address='$address',city='$city',state='$state' where id='".$_SESSION['id']."'");
 	if($query){
-		$successdetails="Profile Information Successfully Updated!!";
+		echo "<script>
+					setTimeout(function() {
+						swal({
+							title: 'Congratulaions!',
+							text: 'Details Updated Successfully.',
+							type: 'success',
+							confirmButtonText: 'Ok'
+						}, function() {
+							window.location = 'profile.php';
+						}, 1000);
+					});
+
+		
+		</script>";
 		
 	}
 	else{
-		$errordetails="Sorry!Something went wrong!!";
+		echo "<script>
+				setTimeout(function() {
+					swal({
+						title: 'Oops!',
+						text: 'Something!went wrong.',
+						type: 'error' ,
+						confirmButtonText: 'Ok'
+					}, function() {
+						window.location = 'profile.php';
+					
+					}, 1000);
+				});
+
+		
+		</script>";
 		
 	}
 	
@@ -64,11 +205,40 @@ if(isset($_POST['submitview'])){
 	$query=mysqli_query($bd,"insert into speaks(userid,speaks) values('".$_SESSION['id']."','$speak')");
 	if($query)
 	{
-		$successview="Thankyou for sharing your views with Care Princsys!!";
+		
+		echo "<script>
+					setTimeout(function() {
+						swal({
+							title: 'Thankyou!',
+							text: 'For sharing your views with Care Princsys!',
+							type: 'success',
+							confirmButtonText: 'Ok'
+						}, function() {
+							window.location = 'profile.php';
+						}, 1000);
+					});
+
+		
+		</script>";
 		
 	}
 	else{
-		$errorview="Sorry!Something Went Wrong!!";
+		echo "<script>
+				setTimeout(function() {
+					swal({
+						title: 'Oops!',
+						text: 'Something!went wrong.',
+						type: 'error' ,
+						confirmButtonText: 'Ok'
+					}, function() {
+						window.location = 'profile.php';
+					
+					}, 1000);
+				});
+
+		
+		</script>";
+		
 		
 		
 	}
@@ -76,7 +246,6 @@ if(isset($_POST['submitview'])){
 	
 }
 ?>
-
 <!-- =========================
     PROFILE SECTION   
 ============================== -->
@@ -98,10 +267,12 @@ if(isset($_POST['submitview'])){
 				  <?php } ?>
 				<form action="profile.php" method="post" enctype="multipart/form-data">
 					<div class="col-lg-6">
-						<input type="file" name="pic" id="aa" required>	
+						<input type="file" name="pic" id="uploadFile" style="display:none;" accept=".jpeg,.jpg,.png,.gif">	
+						<a href="#" data-toggle="tooltip" data-placement="bottom" title="Only.jpeg,.jpg,.png and upto 5MB photo size" id="uploadTrigger" name="profile_image"><i class="fa fa-camera" aria-hidden="true"></i> Add Profile Photo</a>
 					</div>
 					<div class="col-lg-6">
-						<input type="submit" style="position: relative;right: 5px;" class="btn btn-xs btn-info" name="upload" value="Change Profile" >		
+						<input type="submit" class="btn btn-sm btn-info" name="upload" id="upload" value="Upload" >		
+						<input type="submit" class="btn btn-sm btn-info" name="remove"  value="Remove" >		
 					</div>
 				</form>	
 				</div>				
@@ -333,6 +504,7 @@ if(isset($_POST['submitview'])){
 		</div>
 	</div>
 </section>
+
 <script>
 	function changePassword(){
 			var form = document.getElementById('form');
@@ -398,6 +570,19 @@ if(isset($_POST['submitview'])){
 <script src="js/smoothscroll.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/custom.js"></script>
+<script>
+$(document).ready(function(){
+	$("#uploadTrigger").click(function(){
+           $("#uploadFile").click();
+        });
+	
+	
+	
+	
+	
+});
+
+</script>
 
 </body>
 </html>
