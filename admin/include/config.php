@@ -1,3 +1,5 @@
+ 
+
 <?php
 $mysql_hostname = "localhost";
 $mysql_user =  "root";
@@ -7,3 +9,6 @@ $bd = mysqli_connect($mysql_hostname, $mysql_user, $mysql_password) or die("Coul
 mysqli_select_db($bd, $mysql_database) or die("Could not select database");
 
 ?>
+
+
+
