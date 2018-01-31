@@ -642,7 +642,7 @@ if(isset($_POST['post'])){
             swal({
                 title: 'Oops!',
                 text: 'Something Went wronf.Try Again!.',
-                type: 'Failure',
+                type: 'error' ,
                 confirmButtonText: 'Ok'
             }, function() {
                 window.location = 'newsfeed.php';
@@ -683,7 +683,7 @@ if(isset($_POST['post'])){
             swal({
                 title: 'Oops!',
                 text: 'Something Went wronf.Try Again!.',
-                type: 'Failure',
+               type: 'error' ,
                 confirmButtonText: 'Ok'
             }, function() {
                 window.location = 'newsfeed.php';

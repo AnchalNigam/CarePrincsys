@@ -2,32 +2,6 @@
 session_start();
 error_reporting(0);
 include("include/config.php");
-if(isset($_POST['submit']))
-$username = $_POST['user'];
-$password = md5($_POST['pass']);
-{
-$ret=mysqli_query($bd, "SELECT * FROM admin WHERE username='$username' and password='$password'");
-$num=mysqli_fetch_array($ret);
-if($num>0)
-{
-$extra="index.php";
-$_SESSION['alogin']=$_POST['username'];
-$_SESSION['id']=$num['id'];
-$host=$_SERVER['HTTP_HOST'];
-$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-else
-{
-$_SESSION['errmsg']="Invalid username or password";
-$extra="index.php";
-$host  = $_SERVER['HTTP_HOST'];
-$uri  = rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
-header("location:http://$host$uri/$extra");
-exit();
-}
-}
 ?>
 
 <!DOCTYPE html>
@@ -48,6 +22,9 @@ exit();
     <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
  <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" />
+ <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>	 
+
 
     <!-- Animation library for notifications   -->
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
@@ -64,8 +41,51 @@ exit();
      <link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 </head>
 <body>
+<?php
+if(isset($_POST['submit']))
+{
+	$username=$_POST['user'];
+	
+	$password=md5($_POST['pass']);
+	
+$ret=mysqli_query($bd, "SELECT * FROM admin WHERE username='$username' and password='$password'");
+$num=mysqli_fetch_array($ret);
 
-	<div class="navbar navbar-fixed-top">
+if($num>0)
+{
+$extra="admin.php";//
+$_SESSION['alogin']=$_POST['name'];
+$_SESSION['id']=$num['id'];
+$host=$_SERVER['HTTP_HOST'];
+$uri=rtrim(dirname($_SERVER['PHP_SELF']),'/\\');
+header("location:http://$host$uri/$extra");
+exit();
+}
+else
+{
+  echo "<script>
+		setTimeout(function() {
+            swal({
+                title: 'Oops!',
+                text: 'Invalid Username and Password!',
+                type: 'error' ,
+                confirmButtonText: 'Ok'
+            }, function() {
+                window.location = 'index.php';
+			
+            }, 1000);
+        });
+
+		
+		</script>";
+
+}
+}
+
+
+
+?>
+<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
 				
@@ -102,7 +122,7 @@ exit();
 						<div class="module-head">
 							<h3>Sign In</h3>
 						</div>
-						<span style="color:red;" ><?php echo htmlentities($_SESSION['errmsg']); ?><?php echo htmlentities($_SESSION['errmsg']="");?></span>
+						
 						<div class="module-body">
 							<div class="control-group">
 								<div class="controls row-fluid">
