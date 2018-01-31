@@ -93,7 +93,7 @@ if(isset($_POST['donate'])){
 		setTimeout(function() {
             swal({
                 title: 'Oops!',
-                text: 'Something Went wronf.Try Again!.',
+                text: 'Something Went wrong.Try Again!.',
                 type: 'Failure',
                 confirmButtonText: 'Ok'
             }, function() {
